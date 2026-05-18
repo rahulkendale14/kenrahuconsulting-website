@@ -5,6 +5,7 @@ import PRDGenerator from './pages/PRDGenerator'
 import ExperienceCalculator from './pages/ExperienceCalculator'
 import CVScreeningSetup from './pages/CVScreeningSetup'
 import CVScreeningAssessment from './pages/CVScreeningAssessment'
+import FakeResumeDetector from './pages/FakeResumeDetector'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/tools/experience-calculator" element={<ExperienceCalculator />} />
         <Route path="/tools/cv-screening" element={<CVScreeningSetup />} />
         <Route path="/tools/cv-screening/:config" element={<CVScreeningAssessment />} />
+        <Route path="/tools/fake-resume-detector" element={<FakeResumeDetector />} />
       </Routes>
     </BrowserRouter>
   )

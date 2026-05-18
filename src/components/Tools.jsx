@@ -34,6 +34,14 @@ const tools = [
     badge: null,
   },
   {
+    title: 'Fake Resume Detector',
+    description: 'Paste any IT resume and get an AI fraud risk score in 30 seconds. Detects AI-generated content, fabricated experience, and proxy candidate patterns.',
+    status: 'live',
+    link: '/tools/fake-resume-detector',
+    linkLabel: 'Detect Now →',
+    badge: null,
+  },
+  {
     title: 'Roadmap Prioritizer',
     description: 'Rank and prioritise your AI initiatives based on effort, impact, and readiness. Build a roadmap that makes sense.',
     status: 'soon',

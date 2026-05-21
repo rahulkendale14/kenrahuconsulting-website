@@ -42,6 +42,14 @@ const tools = [
     badge: null,
   },
   {
+    title: 'Candidate Submission Writer',
+    description: 'Paste a CV and job description — get a client-ready submission writeup and structured email draft in 10 seconds. Built for recruitment agencies.',
+    status: 'live',
+    link: '/tools/candidate-submission-writer',
+    linkLabel: 'Try It Free →',
+    badge: null,
+  },
+  {
     title: 'Roadmap Prioritizer',
     description: 'Rank and prioritise your AI initiatives based on effort, impact, and readiness. Build a roadmap that makes sense.',
     status: 'soon',

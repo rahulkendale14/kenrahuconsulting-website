@@ -50,12 +50,12 @@ const tools = [
     badge: null,
   },
   {
-    title: 'Roadmap Prioritizer',
-    description: 'Rank and prioritise your AI initiatives based on effort, impact, and readiness. Build a roadmap that makes sense.',
-    status: 'soon',
-    link: null,
-    linkLabel: null,
-    badge: 'Coming Soon',
+    title: 'AI Use Case Prioritizer',
+    description: 'Paste your list of AI ideas and get a scored, ranked matrix across 5 dimensions — impact, effort, risk, data availability, and governance complexity.',
+    status: 'live',
+    link: '/tools/use-case-prioritizer',
+    linkLabel: 'Prioritise Now →',
+    badge: null,
   },
 ]
 

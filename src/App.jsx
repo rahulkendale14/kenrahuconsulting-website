@@ -7,6 +7,7 @@ import CVScreeningSetup from './pages/CVScreeningSetup'
 import CVScreeningAssessment from './pages/CVScreeningAssessment'
 import FakeResumeDetector from './pages/FakeResumeDetector'
 import CandidateSubmissionWriter from './pages/CandidateSubmissionWriter'
+import UseCasePrioritizer from './pages/UseCasePrioritizer'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/tools/cv-screening/:config" element={<CVScreeningAssessment />} />
         <Route path="/tools/fake-resume-detector" element={<FakeResumeDetector />} />
         <Route path="/tools/candidate-submission-writer" element={<CandidateSubmissionWriter />} />
+        <Route path="/tools/use-case-prioritizer" element={<UseCasePrioritizer />} />
       </Routes>
     </BrowserRouter>
   )

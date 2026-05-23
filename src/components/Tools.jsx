@@ -2,11 +2,19 @@ import { Link } from 'react-router-dom'
 
 const tools = [
   {
-    title: 'PRD Generator',
-    description: 'Generate a complete, professional Product Requirements Document in seconds. Answer 7 questions — get a full PRD with user stories, acceptance criteria, risks, and timeline.',
+    title: 'Enterprise AI PRD Generator',
+    description: 'Generate a 12-section enterprise AI PRD — stakeholder RACI, governance framework, measurement model, and operating model. Built on a real enterprise AI program.',
     status: 'live',
     link: '/tools/prd-generator',
-    linkLabel: 'Try It Free →',
+    linkLabel: 'Generate PRD →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'AI Use Case Prioritizer',
+    description: 'Paste your AI ideas and get a scored, ranked matrix across 5 dimensions — business impact, effort, risk, data availability, and governance complexity.',
+    status: 'live',
+    link: '/tools/use-case-prioritizer',
+    linkLabel: 'Prioritise Now →',
     tag: 'AI-Powered',
   },
   {

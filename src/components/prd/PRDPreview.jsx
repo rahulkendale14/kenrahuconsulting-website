@@ -1,13 +1,18 @@
 import { useState } from 'react'
 
 const SECTION_LABELS = {
+  executiveSummary: 'Executive Summary',
   problemStatement: 'Problem Statement',
-  goalsAndMetrics: 'Goals & Success Metrics',
-  targetUsers: 'Target Users',
-  featuresAndRequirements: 'Features & Requirements',
-  outOfScope: 'Out of Scope',
-  timeline: 'Timeline',
-  risksAndAssumptions: 'Risks & Assumptions',
+  strategicRationale: 'Strategic Rationale',
+  automatedFunctions: 'Automated Functions',
+  goalsAndMetrics: 'Goals & Metrics Framework',
+  stakeholdersAndRoles: 'Stakeholders & Roles (RACI)',
+  featureRequirements: 'Feature Requirements',
+  governanceFramework: 'Governance Framework',
+  securityAndCompliance: 'Security & Compliance',
+  operatingModel: 'End-to-End Operating Model',
+  reportsToCreate: 'Reports to Create',
+  risksAndOpenQuestions: 'Risks & Open Questions',
 }
 
 export default function PRDPreview({ prd, onUnlock }) {
@@ -30,42 +35,38 @@ export default function PRDPreview({ prd, onUnlock }) {
 
   return (
     <div className="min-h-screen bg-bg px-6 py-16">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-3xl mx-auto">
 
-        {/* Header */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 bg-surface border border-[#2A2A2A] rounded-full px-4 py-1.5 mb-4">
             <span className="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
-            <span className="text-muted text-sm">Your PRD is ready</span>
+            <span className="text-muted text-sm">Your Enterprise PRD is ready</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold mb-2">Here's a preview</h2>
-          <p className="text-muted text-sm">Enter your email to unlock the full PRD</p>
+          <p className="text-muted text-sm">Enter your email to unlock all 12 sections</p>
         </div>
 
-        {/* Visible sections */}
         {visibleSections.map(([key, content]) => (
           <div key={key} className="bg-surface border border-[#2A2A2A] rounded-xl p-6 mb-4">
             <h3 className="text-accent text-xs font-semibold uppercase tracking-widest mb-3">
-              {SECTION_LABELS[key]}
+              {SECTION_LABELS[key] || key}
             </h3>
-            <p className="text-sm leading-relaxed whitespace-pre-line">{content}</p>
+            <p className="text-sm leading-relaxed whitespace-pre-line text-white/90">{content}</p>
           </div>
         ))}
 
-        {/* Locked sections with blur */}
         <div className="relative">
           <div className="space-y-4 blur-sm pointer-events-none select-none">
             {lockedSections.map(([key, content]) => (
               <div key={key} className="bg-surface border border-[#2A2A2A] rounded-xl p-6">
                 <h3 className="text-accent text-xs font-semibold uppercase tracking-widest mb-3">
-                  {SECTION_LABELS[key]}
+                  {SECTION_LABELS[key] || key}
                 </h3>
-                <p className="text-sm leading-relaxed whitespace-pre-line">{content}</p>
+                <p className="text-sm leading-relaxed whitespace-pre-line text-white/90">{content}</p>
               </div>
             ))}
           </div>
 
-          {/* Gradient overlay + email gate */}
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-bg/20 via-bg/80 to-bg rounded-xl px-6">
             <div className="bg-surface border border-[#2A2A2A] rounded-xl p-6 w-full max-w-md text-center">
 
@@ -76,7 +77,7 @@ export default function PRDPreview({ prd, onUnlock }) {
               </div>
 
               <h3 className="font-bold text-lg mb-1">Unlock your full PRD</h3>
-              <p className="text-muted text-sm mb-5">5 more sections including Features, Timeline & Risks</p>
+              <p className="text-muted text-sm mb-5">10 more sections — Stakeholder RACI, Governance, Metrics, Operating Model, Reports & more</p>
 
               <form onSubmit={handleSubmit} className="space-y-3">
                 <input

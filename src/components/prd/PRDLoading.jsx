@@ -1,13 +1,14 @@
-const STEPS = [
-  'Analysing your product inputs...',
-  'Defining problem statement...',
-  'Mapping user personas...',
-  'Prioritising features...',
-  'Writing timeline & milestones...',
-  'Finalising your PRD...',
-]
-
 import { useState, useEffect } from 'react'
+
+const STEPS = [
+  'Analysing your AI initiative...',
+  'Mapping stakeholders and RACI...',
+  'Building governance framework...',
+  'Writing measurement framework...',
+  'Drafting feature requirements...',
+  'Structuring operating model...',
+  'Finalising your enterprise PRD...',
+]
 
 export default function PRDLoading() {
   const [stepIndex, setStepIndex] = useState(0)
@@ -15,7 +16,7 @@ export default function PRDLoading() {
   useEffect(() => {
     const interval = setInterval(() => {
       setStepIndex(prev => (prev < STEPS.length - 1 ? prev + 1 : prev))
-    }, 1800)
+    }, 2000)
     return () => clearInterval(interval)
   }, [])
 
@@ -23,17 +24,15 @@ export default function PRDLoading() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-bg px-6">
       <div className="max-w-sm w-full text-center">
 
-        {/* Spinner */}
         <div className="w-16 h-16 mx-auto mb-8 relative">
           <div className="w-16 h-16 rounded-full border-4 border-surface border-t-accent animate-spin"></div>
         </div>
 
-        <h2 className="text-xl font-bold mb-3">Generating your PRD</h2>
+        <h2 className="text-xl font-bold mb-3">Generating your Enterprise PRD</h2>
         <p className="text-accent text-sm font-medium mb-8 min-h-[20px] transition-all duration-500">
           {STEPS[stepIndex]}
         </p>
 
-        {/* Progress dots */}
         <div className="flex justify-center gap-2">
           {STEPS.map((_, i) => (
             <div
@@ -45,7 +44,7 @@ export default function PRDLoading() {
           ))}
         </div>
 
-        <p className="text-muted/50 text-xs mt-8">This usually takes 10–15 seconds</p>
+        <p className="text-muted/50 text-xs mt-8">Building 12 sections · Usually takes 15–20 seconds</p>
       </div>
     </div>
   )

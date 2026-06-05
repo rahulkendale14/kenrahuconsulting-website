@@ -32,6 +32,7 @@ const tools = [
     link: '/tools/cv-screening',
     linkLabel: 'Try It Free →',
     badge: null,
+    caseStudy: '/portfolio/cv-screening-workflow',
   },
   {
     title: 'Fake Resume Detector',
@@ -104,13 +105,21 @@ export default function Tools() {
               <p className="text-muted text-sm leading-relaxed flex-1">{tool.description}</p>
 
               {tool.link && (
-                <div className="mt-6">
+                <div className="mt-6 flex items-center gap-4">
                   <Link
                     to={tool.link}
                     className="text-accent hover:text-white text-sm font-semibold transition-colors"
                   >
                     {tool.linkLabel}
                   </Link>
+                  {tool.caseStudy && (
+                    <Link
+                      to={tool.caseStudy}
+                      className="text-muted hover:text-white text-sm transition-colors"
+                    >
+                      Case study →
+                    </Link>
+                  )}
                 </div>
               )}
             </div>

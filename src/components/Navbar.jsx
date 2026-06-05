@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -35,6 +36,12 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <Link
+            to="/portfolio"
+            className="text-muted hover:text-white transition-colors text-sm font-medium"
+          >
+            Portfolio
+          </Link>
         </div>
 
         <div className="hidden md:flex">
@@ -79,6 +86,13 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <Link
+            to="/portfolio"
+            className="text-muted hover:text-white transition-colors text-sm font-medium py-1"
+            onClick={() => setMenuOpen(false)}
+          >
+            Portfolio
+          </Link>
           <a
             href="https://calendly.com/kendale-rahul/30min"
             target="_blank"

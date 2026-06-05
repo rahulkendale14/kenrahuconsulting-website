@@ -9,6 +9,7 @@ export default function CVScreeningSetup() {
 
   const handleGenerate = (config) => {
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(config))))
+      .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
     const url = `${window.location.origin}/tools/cv-screening/${encoded}`
     setShareUrl(url)
     setStage('success')

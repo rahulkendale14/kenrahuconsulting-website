@@ -53,14 +53,36 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — photo */}
-          <div className="flex-shrink-0">
-            <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden border-4 border-navy-light shadow-xl">
+          {/* Right — photo + skills */}
+          <div className="flex-shrink-0 flex flex-col items-center gap-5">
+            <div className="w-64 h-64 lg:w-72 lg:h-72 rounded-2xl overflow-hidden border-4 border-navy-light shadow-xl">
               <img
                 src={rahulPhoto}
                 alt="Rahul Kendale — AI Product Manager"
                 className="w-full h-full object-cover object-top"
               />
+            </div>
+
+            <div className="w-full max-w-xs space-y-3">
+              {/* AI Skills */}
+              <div className="bg-surface border border-border rounded-xl p-4">
+                <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-3">AI Skills</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {['Prompt Engineering','LLM Product Design','AI Governance','AI Use Case Design','Claude API · Groq','n8n Automation','Agentic Workflows','AI Metrics & Eval'].map(s => (
+                    <span key={s} className="bg-navy/8 text-navy text-xs font-medium px-2.5 py-1 rounded-full border border-navy/15">{s}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* PM Skills */}
+              <div className="bg-surface border border-border rounded-xl p-4">
+                <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-3">Product Management</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {['Enterprise Strategy','Stakeholder Mgmt','PRD Writing','Roadmapping','OKRs & KPIs','Agile / Scrum','User Research','Go-to-Market'].map(s => (
+                    <span key={s} className="bg-bg text-muted text-xs font-medium px-2.5 py-1 rounded-full border border-border">{s}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 

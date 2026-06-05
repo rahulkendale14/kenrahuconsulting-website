@@ -26,6 +26,39 @@ const tools = [
     tag: 'Free Tool',
   },
   {
+    title: 'AI Stakeholder RACI Builder',
+    description: 'Describe your AI product and team structure. Get a complete RACI matrix across 5 activity categories — who is Responsible, Accountable, Consulted, and Informed. Built on a 13-role enterprise AI framework.',
+    status: 'live',
+    link: '/tools/raci-builder',
+    linkLabel: 'Build My RACI →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'AI Metrics Framework Generator',
+    description: 'Describe your AI product and get a complete measurement model — north star metric, leading indicators, lagging KPIs, owners, and reporting cadence across 9 areas. Built on a real enterprise AI program.',
+    status: 'live',
+    link: '/tools/metrics-framework',
+    linkLabel: 'Generate Framework →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'AI Governance Checklist Generator',
+    description: 'Describe your AI product and get a tailored governance checklist across all 5 layers — business, product, model, operational, and risk & compliance. Scaled to your risk level and deployment stage.',
+    status: 'live',
+    link: '/tools/governance-checklist',
+    linkLabel: 'Generate Checklist →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'AI Candidate Screener',
+    description: 'Set your job criteria once. Share a link with candidates. AI screens every CV against your requirements and emails you a breakdown — automatically.',
+    status: 'live',
+    link: '/tools/cv-screening',
+    linkLabel: 'Set Up Screener →',
+    caseStudy: '/portfolio/cv-screening-workflow',
+    tag: 'AI-Powered',
+  },
+  {
     title: 'User Research Synthesizer',
     description: 'Paste interview transcripts and get synthesised themes, pain points, and opportunity areas — in minutes instead of days.',
     status: 'soon',
@@ -100,13 +133,21 @@ export default function Tools() {
               <p className="text-muted text-sm leading-relaxed flex-1">{tool.description}</p>
 
               {tool.link && (
-                <div className="mt-6">
+                <div className="mt-6 flex items-center gap-4">
                   <Link
                     to={tool.link}
                     className="text-navy hover:text-navy-dark text-sm font-semibold transition-colors"
                   >
                     {tool.linkLabel}
                   </Link>
+                  {tool.caseStudy && (
+                    <Link
+                      to={tool.caseStudy}
+                      className="text-muted hover:text-text text-sm transition-colors"
+                    >
+                      Case study →
+                    </Link>
+                  )}
                 </div>
               )}
             </div>

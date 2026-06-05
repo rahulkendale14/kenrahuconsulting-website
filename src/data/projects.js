@@ -7,6 +7,8 @@ export const projects = [
     status: 'Live',
     duration: '3 weeks',
     impact: '70% faster screening',
+    toolLink: '/tools/cv-screening',
+    toolLabel: 'Try the AI Candidate Screener',
 
     hero: {
       client: 'Mid-size staffing firm (anonymised)',

@@ -73,6 +73,61 @@ export default function ProjectPage() {
           </div>
         </div>
 
+        {/* Live Tool CTA */}
+        {project.toolLink && (
+          <div className="mb-14 border border-navy/20 rounded-xl overflow-hidden">
+            {/* Mock browser chrome */}
+            <div className="bg-navy/5 border-b border-navy/10 px-4 py-3 flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-red-300"></span>
+              <span className="w-3 h-3 rounded-full bg-yellow-300"></span>
+              <span className="w-3 h-3 rounded-full bg-green-300"></span>
+              <span className="ml-3 flex-1 bg-white border border-border rounded-md px-3 py-1 text-xs text-muted font-mono">
+                kenrahuconsulting.com{project.toolLink}
+              </span>
+            </div>
+
+            {/* Tool preview */}
+            <div className="bg-bg px-6 py-8">
+              <div className="max-w-md mx-auto space-y-4">
+                <div className="text-center mb-6">
+                  <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Recruiter Setup</p>
+                  <p className="text-base font-bold text-text">Configure Your CV Screener</p>
+                  <p className="text-muted text-xs mt-1">Set your criteria once. Share the link. AI screens every CV.</p>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Job Role', placeholder: 'e.g. Senior Product Manager' },
+                    { label: 'Job Requirements', placeholder: '- 3+ years PM experience\n- Strong data skills...', textarea: true },
+                    { label: 'Your Email', placeholder: 'you@yourcompany.com' },
+                  ].map(f => (
+                    <div key={f.label}>
+                      <p className="text-xs font-medium text-text mb-1">{f.label}</p>
+                      {f.textarea
+                        ? <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60 h-16 font-mono">{f.placeholder}</div>
+                        : <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60">{f.placeholder}</div>
+                      }
+                    </div>
+                  ))}
+                  <div className="w-full bg-navy/10 border border-navy/20 rounded-lg px-3 py-2 text-center text-xs font-semibold text-navy">
+                    Generate Shareable Link →
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA bar */}
+            <div className="bg-surface border-t border-navy/10 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="text-sm text-muted">This tool is live and free to use — no signup required.</p>
+              <Link
+                to={project.toolLink}
+                className="shrink-0 bg-navy hover:bg-navy-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
+              >
+                {project.toolLabel} →
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* Problem */}
         <Section title="The Problem">
           <p className="text-muted leading-relaxed mb-6">{project.problem.summary}</p>

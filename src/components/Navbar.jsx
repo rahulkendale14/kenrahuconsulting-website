@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -14,6 +15,7 @@ export default function Navbar() {
           <a href="#tools" className="text-muted hover:text-text text-sm font-medium transition-colors">Tools</a>
           <a href="#skills" className="text-muted hover:text-text text-sm font-medium transition-colors">Skills</a>
           <a href="#contact" className="text-muted hover:text-text text-sm font-medium transition-colors">Contact</a>
+          <Link to="/portfolio" className="text-muted hover:text-text text-sm font-medium transition-colors">Portfolio</Link>
           <a
             href="https://calendly.com/kendale-rahul/30min"
             target="_blank"
@@ -42,6 +44,7 @@ export default function Navbar() {
           <a href="#tools" className="text-muted text-sm font-medium" onClick={() => setOpen(false)}>Tools</a>
           <a href="#skills" className="text-muted text-sm font-medium" onClick={() => setOpen(false)}>Skills</a>
           <a href="#contact" className="text-muted text-sm font-medium" onClick={() => setOpen(false)}>Contact</a>
+          <Link to="/portfolio" className="text-muted text-sm font-medium" onClick={() => setOpen(false)}>Portfolio</Link>
           <a
             href="https://calendly.com/kendale-rahul/30min"
             target="_blank"

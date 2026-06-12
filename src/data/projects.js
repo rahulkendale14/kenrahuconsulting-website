@@ -182,4 +182,99 @@ export const projects = [
       { label: 'Recommendation Engine Logic', available: false },
     ],
   },
+  {
+    slug: 'prd-generator',
+    title: 'Enterprise AI PRD Generator',
+    subtitle: 'A structured tool that converts a product brief into a 12-section enterprise-grade PRD in under 60 seconds — saving 2 hours per document.',
+    tags: ['Product Management', 'Prompt Engineering', 'Tool Design'],
+    status: 'Live',
+    duration: '1 week',
+    impact: '2 hrs saved per PRD',
+    toolLink: '/tools/prd-generator',
+    toolLabel: 'Try the PRD Generator',
+
+    hero: {
+      client: 'Personal project',
+      industry: 'AI Product Management',
+      teamSize: '1 (PM + Builder)',
+      problem: 'Writing PRDs for enterprise AI initiatives required 2+ hours per document filling in sections — stakeholder mapping, governance controls, measurement framework — that should be standard but no tool encoded them correctly.',
+    },
+
+    problem: {
+      summary: 'Writing a PRD for an AI initiative is not the same as writing a standard feature PRD. Enterprise AI projects require stakeholder RACI across 13 roles, governance layers for model decisions, a measurement framework across 9 metric areas, human-in-the-loop boundaries, and a compliance section that varies by regulated industry. Generic "generate a PRD" prompts produce shallow outputs that look complete on screen but fall apart in a real stakeholder review. The frustration was personal: I was writing PRDs for AI workflow automation projects and spending 2+ hours per document on sections that should be standard. The problem was not knowing what to write — it was that no tool encoded the right enterprise framework to write against.',
+      quotes: [
+        { text: 'I keep getting PRDs that cover features but skip governance and measurement entirely — no one approves those in a regulated environment.', role: 'AI PM archetype' },
+        { text: 'Writing the stakeholder section from scratch every time is pure overhead. The roles do not change, only the responsibilities do.', role: 'Product Lead archetype' },
+      ],
+      rootCauses: [
+        'Generic AI prompts treat a PRD as a feature spec, not an operating model document',
+        'Most templates omit governance, measurement framework, and human-in-the-loop boundaries entirely',
+        'Users without an enterprise PM background do not know which sections are missing until the document fails review',
+      ],
+    },
+
+    product: {
+      summary: 'A 5-stage guided tool that accepts structured inputs about an AI initiative, then generates a full 12-section enterprise PRD via a system prompt encoding a complete enterprise operating model. Designed for AI PMs, consultants, and product leads scoping AI workflow automation projects.',
+      components: [
+        { name: 'Structured input form', description: 'Captures product name, problem statement, target users, goals and metrics, functions to automate, compliance requirements, and timeline. Forces articulation of essentials before generation begins — vague inputs produce vague outputs.' },
+        { name: 'Functions to automate selector', description: '8 pre-defined checkbox options covering the most common AI workflow functions: intake normalisation, summarisation, routing, root-cause hinting, and more. If none are selected, the system infers from the problem statement.' },
+        { name: 'Enterprise system prompt', description: 'Encodes 13 stakeholder roles, 5 governance layers, 9 measurement metric areas, a 6-stage operating model, human-in-the-loop principles, and a reports framework. This is what separates the output from generic PRD generators.' },
+        { name: 'Preview gate', description: 'Shows a teaser of the generated PRD before unlocking the full document — a natural checkpoint that lets users confirm the output is relevant before reading 12 sections.' },
+        { name: '12-section structured output', description: 'Each section rendered individually from JSON: executive summary, problem statement, strategic rationale, automated functions, goals and metrics, stakeholders and roles, feature requirements, governance framework, security and compliance, operating model, reports to create, risks and open questions.' },
+      ],
+    },
+
+    keyDecisions: [
+      {
+        decision: 'Structured form over a freeform prompt box',
+        rationale: 'I considered a single text input where users paste their idea. I rejected it because vague inputs produce vague outputs. A structured form forces the user to articulate the problem, success metrics, and target users before generation. The quality difference in output is significant — the model has concrete anchors to work from rather than interpreting a half-formed idea.',
+        tradeoff: 'More friction at entry. Offset by the fact that users who complete the form have already done the thinking, so the output reflects their actual initiative rather than a generic interpretation.',
+      },
+      {
+        decision: 'System prompt as a complete enterprise operating model',
+        rationale: 'The system prompt does not say "write a PRD." It encodes a full enterprise operating model: 13 stakeholder roles with specific responsibilities, 5 governance layers, 9 metric areas, a 6-stage operating model, and human-in-the-loop principles. Inspired by enterprise PM practice in regulated industries. This is what produces enterprise-grade output rather than a feature spec with headings.',
+        tradeoff: 'The prompt is long and opinionated — it excels for AI workflow automation in regulated industries, not for a consumer app PRD. The tool is scoped accordingly.',
+      },
+      {
+        decision: 'Pre-defined automation functions as checkboxes rather than freeform',
+        rationale: 'Rather than asking users to describe what they want to automate in free text, I offered 8 options derived from the most common AI workflow automation patterns. This reduces cognitive load and ensures the generated PRD uses recognisable automation framing. Selecting nothing is a valid choice — the model infers from the problem statement.',
+        tradeoff: 'Limits to 8 options. Edge cases outside these functions fall back to inference, which works well in practice given the tool\'s defined scope.',
+      },
+      {
+        decision: 'Preview gate before full document unlock',
+        rationale: 'The output flows into a preview screen showing partial content before the user sees all 12 sections. This creates a useful pause point — users confirm the generation is relevant to their initiative before investing time reading a detailed document.',
+        tradeoff: 'One extra click for the user. Acceptable given it surfaces whether the generation is on-target before the user commits to reading the full output.',
+      },
+    ],
+
+    evalFramework: {
+      summary: 'Validation focused on whether the output would pass a real enterprise stakeholder review — not just whether it looked complete.',
+      stages: [
+        { name: 'Section completeness check', description: 'Verified all 12 sections generated with substantive content across 3 representative inputs: an incident triage tool, a document summarisation product, and a customer routing automation. No section should produce generic placeholder text.' },
+        { name: 'Stakeholder and governance coverage', description: 'Checked that all 13 stakeholder roles appeared with responsibilities adapted to each specific initiative, and that all 5 governance layers contained concrete activities rather than generic statements.' },
+        { name: 'Metric specificity check', description: 'Verified the goals and metrics section covered all 9 metric areas with measures specific to the stated initiative. A list of generic KPIs signals the model did not anchor to the user\'s context.' },
+      ],
+    },
+
+    failureModes: [
+      { mode: 'Vague inputs produce generic output', impact: 'High', mitigation: 'Required fields for problem, target users, and goals; placeholder text in each field guides the level of specificity needed' },
+      { mode: 'Tool used outside its intended scope', impact: 'Medium', mitigation: 'Landing page and form framing explicitly scoped to AI workflow automation initiatives in enterprise or regulated environments' },
+      { mode: 'User treats output as final without review', impact: 'High', mitigation: 'Strategic rationale section explicitly names which decisions must remain under human control; output is positioned as a structured starting point, not a finished document' },
+      { mode: 'Rate limit frustration for power users', impact: 'Medium', mitigation: '3 PRDs per day per IP — covers legitimate daily use while preventing abuse of a free, inference-cost tool' },
+    ],
+
+    v2Changes: [
+      'Export directly to Notion or Google Docs — copy-paste is the biggest friction point after generation',
+      'Section-level regeneration — rerun a single section without regenerating the full PRD',
+      'Saved PRD history so users can compare versions across iterations of the same initiative',
+      'Input templates for common initiative types: triage automation, document processing, customer routing',
+      'Team mode — share a draft PRD link for collaborative annotation before finalising',
+    ],
+
+    documents: [
+      { label: 'System Prompt Design Doc', available: false },
+      { label: 'Enterprise Operating Model Reference', available: false },
+      { label: 'Eval Test Cases (3 initiatives)', available: false },
+    ],
+  },
 ]

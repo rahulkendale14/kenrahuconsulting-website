@@ -89,7 +89,30 @@ export default function ProjectPage() {
             {/* Tool preview */}
             <div className="bg-bg px-6 py-8">
               <div className="max-w-md mx-auto space-y-4">
-                {project.slug === 'salary-planner' ? (
+                {project.slug === 'prd-generator' ? (
+                  <>
+                    <div className="text-center mb-6">
+                      <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Enterprise AI PRD Generator</p>
+                      <p className="text-base font-bold text-text">Tell us about your AI initiative</p>
+                      <p className="text-muted text-xs mt-1">12 sections — stakeholder RACI, governance, and measurement framework</p>
+                    </div>
+                    <div className="space-y-3">
+                      {[
+                        { label: 'AI Feature / Product Name', placeholder: 'e.g. Production Defect Triage Automation' },
+                        { label: 'Problem Being Solved', placeholder: 'What manual, high-volume pain point does this address?' },
+                        { label: 'Goals & Success Metrics', placeholder: 'e.g. Reduce MTTR by 40%, free up 20% analyst capacity' },
+                      ].map(f => (
+                        <div key={f.label}>
+                          <p className="text-xs font-medium text-text mb-1">{f.label}</p>
+                          <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60">{f.placeholder}</div>
+                        </div>
+                      ))}
+                      <div className="w-full bg-navy/10 border border-navy/20 rounded-lg px-3 py-2 text-center text-xs font-semibold text-navy">
+                        Generate Enterprise PRD →
+                      </div>
+                    </div>
+                  </>
+                ) : project.slug === 'salary-planner' ? (
                   <>
                     <div className="text-center mb-6">
                       <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Salary Planner</p>

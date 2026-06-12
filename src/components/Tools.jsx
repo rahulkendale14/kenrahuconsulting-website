@@ -59,6 +59,14 @@ const tools = [
     tag: 'AI-Powered',
   },
   {
+    title: 'Salary Planning Assistant',
+    description: 'Enter your monthly income and expenses. Get a clear allocation plan across 7 categories, a one-year goal check, and alternate scenarios if you\'re falling short.',
+    status: 'live',
+    link: '/tools/salary-planner',
+    linkLabel: 'Plan my salary →',
+    tag: 'Free Tool',
+  },
+  {
     title: 'User Research Synthesizer',
     description: 'Paste interview transcripts and get synthesised themes, pain points, and opportunity areas — in minutes instead of days.',
     status: 'soon',

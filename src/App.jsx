@@ -6,6 +6,7 @@ import UseCasePrioritizer from './pages/UseCasePrioritizer'
 import GovernanceChecklist from './pages/GovernanceChecklist'
 import MetricsFramework from './pages/MetricsFramework'
 import RACIBuilder from './pages/RACIBuilder'
+import SalaryPlanner from './pages/SalaryPlanner'
 import Portfolio from './pages/Portfolio'
 import ProjectPage from './pages/ProjectPage'
 import CVScreeningSetup from './pages/CVScreeningSetup'
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/tools/governance-checklist" element={<GovernanceChecklist />} />
         <Route path="/tools/metrics-framework" element={<MetricsFramework />} />
         <Route path="/tools/raci-builder" element={<RACIBuilder />} />
+        <Route path="/tools/salary-planner" element={<SalaryPlanner />} />
       </Routes>
     </BrowserRouter>
   )

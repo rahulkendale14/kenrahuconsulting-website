@@ -89,29 +89,56 @@ export default function ProjectPage() {
             {/* Tool preview */}
             <div className="bg-bg px-6 py-8">
               <div className="max-w-md mx-auto space-y-4">
-                <div className="text-center mb-6">
-                  <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Recruiter Setup</p>
-                  <p className="text-base font-bold text-text">Configure Your CV Screener</p>
-                  <p className="text-muted text-xs mt-1">Set your criteria once. Share the link. AI screens every CV.</p>
-                </div>
-                <div className="space-y-3">
-                  {[
-                    { label: 'Job Role', placeholder: 'e.g. Senior Product Manager' },
-                    { label: 'Job Requirements', placeholder: '- 3+ years PM experience\n- Strong data skills...', textarea: true },
-                    { label: 'Your Email', placeholder: 'you@yourcompany.com' },
-                  ].map(f => (
-                    <div key={f.label}>
-                      <p className="text-xs font-medium text-text mb-1">{f.label}</p>
-                      {f.textarea
-                        ? <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60 h-16 font-mono">{f.placeholder}</div>
-                        : <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60">{f.placeholder}</div>
-                      }
+                {project.slug === 'salary-planner' ? (
+                  <>
+                    <div className="text-center mb-6">
+                      <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Salary Planner</p>
+                      <p className="text-base font-bold text-text">Income & Expenses</p>
+                      <p className="text-muted text-xs mt-1">Enter your numbers. Get a realistic monthly plan.</p>
                     </div>
-                  ))}
-                  <div className="w-full bg-navy/10 border border-navy/20 rounded-lg px-3 py-2 text-center text-xs font-semibold text-navy">
-                    Generate Shareable Link →
-                  </div>
-                </div>
+                    <div className="space-y-3">
+                      {[
+                        { label: 'Monthly take-home salary', placeholder: '₹85,000' },
+                        { label: 'Monthly bills & EMI', placeholder: '₹20,000' },
+                        { label: 'Household expenses', placeholder: '₹15,000' },
+                      ].map(f => (
+                        <div key={f.label}>
+                          <p className="text-xs font-medium text-text mb-1">{f.label}</p>
+                          <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60">{f.placeholder}</div>
+                        </div>
+                      ))}
+                      <div className="w-full bg-navy/10 border border-navy/20 rounded-lg px-3 py-2 text-center text-xs font-semibold text-navy">
+                        Generate My Plan →
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="text-center mb-6">
+                      <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Recruiter Setup</p>
+                      <p className="text-base font-bold text-text">Configure Your CV Screener</p>
+                      <p className="text-muted text-xs mt-1">Set your criteria once. Share the link. AI screens every CV.</p>
+                    </div>
+                    <div className="space-y-3">
+                      {[
+                        { label: 'Job Role', placeholder: 'e.g. Senior Product Manager' },
+                        { label: 'Job Requirements', placeholder: '- 3+ years PM experience\n- Strong data skills...', textarea: true },
+                        { label: 'Your Email', placeholder: 'you@yourcompany.com' },
+                      ].map(f => (
+                        <div key={f.label}>
+                          <p className="text-xs font-medium text-text mb-1">{f.label}</p>
+                          {f.textarea
+                            ? <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60 h-16 font-mono">{f.placeholder}</div>
+                            : <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60">{f.placeholder}</div>
+                          }
+                        </div>
+                      ))}
+                      <div className="w-full bg-navy/10 border border-navy/20 rounded-lg px-3 py-2 text-center text-xs font-semibold text-navy">
+                        Generate Shareable Link →
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 

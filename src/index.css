@@ -32,6 +32,16 @@ body {
   box-sizing: border-box;
 }
 
+.sp-dark {
+  --color-bg: #0F0F0F;
+  --color-surface: #1A1A1A;
+  --color-muted: #94A3B8;
+  --color-accent: #6366F1;
+  --color-accent-dark: #4F46E5;
+  background-color: #0F0F0F;
+  color: white;
+}
+
 a {
   text-decoration: none;
   color: inherit;

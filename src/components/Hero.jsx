@@ -22,8 +22,8 @@ export default function Hero() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a
-                href="#tools"
-                className="bg-gradient-to-r from-navy to-blue-600 hover:from-navy-dark hover:to-blue-700 text-white font-semibold px-8 py-3.5 rounded-xl transition-all text-sm shadow-md hover:shadow-lg"
+                href="#work"
+                className="bg-navy-light hover:bg-navy/20 text-navy font-semibold px-8 py-3.5 rounded-xl transition-all text-sm border border-navy/20"
               >
                 View Tools I've Built
               </a>

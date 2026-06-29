@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import About from '../components/About'
-import Tools from '../components/Tools'
+import Work from '../components/Work'
 import Skills from '../components/Skills'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
-      <Tools />
+      <Work />
       <Skills />
       <Contact />
       <Footer />

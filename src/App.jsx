@@ -9,6 +9,7 @@ import RACIBuilder from './pages/RACIBuilder'
 import SalaryPlanner from './pages/SalaryPlanner'
 import Portfolio from './pages/Portfolio'
 import ProjectPage from './pages/ProjectPage'
+import Process from './pages/Process'
 import CVScreeningSetup from './pages/CVScreeningSetup'
 import CVScreeningAssessment from './pages/CVScreeningAssessment'
 
@@ -18,6 +19,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/process" element={<Process />} />
         <Route path="/portfolio/:slug" element={<ProjectPage />} />
         <Route path="/tools/cv-screening" element={<CVScreeningSetup />} />
         <Route path="/tools/cv-screening/:config" element={<CVScreeningAssessment />} />

@@ -277,4 +277,86 @@ export const projects = [
       { label: 'Eval Test Cases (3 initiatives)', available: false },
     ],
   },
+  {
+    slug: 'ai-email-assistant',
+    title: 'AI Email Assistant',
+    subtitle: 'Auto-drafting professional replies to incoming emails in under 3 seconds',
+    tags: ['AI Automation', 'Make.com', 'Workflow Design'],
+    status: 'Live',
+    duration: '2 hours',
+    impact: 'Draft in 3 seconds',
+
+    hero: {
+      client: 'Personal productivity tool (open for client customisation)',
+      industry: 'Any email-heavy business',
+      teamSize: '1 person',
+      problem: 'Recruitment and client emails pile up fast. Writing professional replies to each one takes 5–10 minutes per email — time that adds up to hours every week.',
+    },
+
+    problem: {
+      summary: 'Repetitive email replies drain time without adding value. The content is predictable, the tone is consistent, yet someone has to sit down and write each one.',
+      quotes: [
+        { text: 'I spend more time writing "thanks for reaching out" emails than actually doing work.', role: 'Freelancer' },
+        { text: 'Every recruitment email gets the same response — I just want it to happen automatically.', role: 'Job Seeker' },
+      ],
+      rootCauses: [
+        'No automation between email inbox and AI tools',
+        'Replies require context from the incoming email — manual copy-paste every time',
+        'No consistent tone or sign-off across replies',
+      ],
+    },
+
+    product: {
+      summary: 'A Make.com scenario that watches Gmail for new emails, sends the content to LLaMA 3.3 (via Groq API) for a professional reply, and saves the draft back to Gmail — all within 3 seconds.',
+      components: [
+        { name: 'Gmail Trigger', description: 'Watches inbox for new emails and fires the scenario automatically on arrival' },
+        { name: 'Groq AI Module', description: 'Sends email snippet to LLaMA 3.3-70b with a system prompt defining tone, length, and sign-off' },
+        { name: 'Draft Creator', description: 'Saves the AI-generated reply as a Gmail draft — pre-addressed to the sender with subject line set' },
+      ],
+    },
+
+    keyDecisions: [
+      {
+        decision: 'Draft, not auto-send',
+        rationale: 'AI generates the reply but the human reviews before sending. Keeps quality control without removing the time saving.',
+        tradeoff: 'Slightly more steps than full automation — but eliminates the risk of a bad AI reply going out unreviewed.',
+      },
+      {
+        decision: 'Groq over OpenAI',
+        rationale: 'Groq runs LLaMA 3.3-70b with sub-second response times and a free API tier — ideal for a high-volume, low-latency use case like email.',
+        tradeoff: 'Less brand recognition than OpenAI, but meaningfully faster and cheaper at scale.',
+      },
+      {
+        decision: 'System prompt controls tone and length',
+        rationale: 'A short, opinionated system prompt ("under 80 words, professional, sign off as The Talent Team") produces consistent output without fine-tuning.',
+        tradeoff: 'Less flexible per-email customisation — acceptable for repetitive reply types.',
+      },
+    ],
+
+    evalFramework: {
+      summary: 'Tested with 5 real recruitment emails before going live. Checked tone consistency, reply length, and whether the AI addressed the email content correctly.',
+      stages: [
+        { name: 'Hardcoded test', description: 'Ran the HTTP module with a static prompt first to confirm Groq connection and response format before wiring in live email data.' },
+        { name: 'Live email test', description: 'Sent 5 test emails with varying content — job offers, follow-ups, introductions. All 5 produced usable drafts with correct tone.' },
+        { name: 'Draft review', description: 'Checked Gmail drafts for formatting, length, and sign-off. No hallucinations. No over-long replies.' },
+      ],
+    },
+
+    failureModes: [
+      { mode: 'Empty email snippet', impact: 'Medium', mitigation: 'Gmail snippet field always populates for real emails — edge case for unusual email clients' },
+      { mode: 'Groq API downtime', impact: 'Low', mitigation: 'Free tier has 99%+ uptime; production version would add error handling route in Make' },
+      { mode: 'Wrong tone for email type', impact: 'Medium', mitigation: 'System prompt tuned per use case — recruitment, client work, and support each get their own prompt variant' },
+    ],
+
+    v2Changes: [
+      'Add email type classifier — route different email types to different system prompts automatically',
+      'Google Sheets log of all incoming emails and AI replies for audit trail',
+      'Slack notification when a draft is created so nothing gets missed',
+    ],
+
+    documents: [
+      { label: 'Make Scenario Export', available: false },
+      { label: 'System Prompt Library', available: false },
+    ],
+  },
 ]

@@ -74,6 +74,19 @@ export const projects = [
       { mode: 'Bias amplification', impact: 'High', mitigation: 'Rubric fields are skills/experience only — no name, photo, or address fields passed to AI' },
     ],
 
+    guardrails: [
+      { rule: 'Never output a shortlist decision — only a score with reasoning', reason: 'Final hiring decisions must remain with the recruiter, not the model' },
+      { rule: 'No personal identifiers passed to the model', reason: 'Name, photo, age, and address fields stripped before scoring to prevent bias amplification' },
+      { rule: 'Score must always include a "why" explanation', reason: 'A bare number with no reasoning cannot be audited or overridden meaningfully' },
+      { rule: 'Rubric version logged with every output', reason: 'Without versioning, a score drop cannot be attributed to candidate quality vs rubric change' },
+    ],
+
+    hallucinationRisks: [
+      { risk: 'Model invents qualifications not present in the CV', likelihood: 'Medium', mitigation: 'Prompt instructs model to quote directly from CV text; any score not grounded in a direct quote fails the eval' },
+      { risk: 'Model infers industry experience from company name rather than stated role', likelihood: 'High', mitigation: 'Rubric fields require role-level evidence, not company-name recognition; pre-processing strips logos and branding' },
+      { risk: 'Model over-scores CVs with confident language regardless of substance', likelihood: 'Medium', mitigation: 'Calibration stage compared AI scores vs recruiter scores for 50 CVs before go-live; systematic over-scoring was caught and corrected via prompt adjustment' },
+    ],
+
     v2Changes: [
       'Integrate directly with their ATS API so CVs flow in automatically',
       'Add interview question generator based on CV gaps flagged in screening',
@@ -166,6 +179,16 @@ export const projects = [
       { mode: 'User distrust of the recommendation', impact: 'High', mitigation: 'Breakdown screen explains each allocation with a short rationale note. Manual adjustment gives users full override capability.' },
       { mode: 'Goal-setting without follow-through', impact: 'Medium', mitigation: 'Final summary includes a print and save option. Recurring tracking and nudges are deferred to V2.' },
       { mode: 'Over-reliance without revisiting the plan', impact: 'Medium', mitigation: 'No persistent state in V1 by design — users re-enter data each session, which forces active re-engagement with their actual numbers over time.' },
+    ],
+
+    guardrails: [
+      { rule: 'Tool must never provide investment or financial advice', reason: 'Not a regulated financial product — output is a planning framework, not a professional recommendation' },
+      { rule: 'Savings target cannot exceed disposable income after obligations', reason: 'Prevents the engine from surfacing an impossible plan that erodes user trust immediately' },
+      { rule: 'Alternate scenarios must always be presented when goal is unachievable', reason: 'A dead-end result ("you cannot hit your goal") with no forward path causes abandonment' },
+    ],
+
+    hallucinationRisks: [
+      { risk: 'No LLM in this product — rule-based engine only', likelihood: 'N/A', mitigation: 'All calculations are deterministic. Hallucination risk does not apply. This is intentional: financial allocation decisions should not be LLM-driven in V1.' },
     ],
 
     v2Changes: [
@@ -263,6 +286,18 @@ export const projects = [
       { mode: 'Rate limit frustration for power users', impact: 'Medium', mitigation: '3 PRDs per day per IP — covers legitimate daily use while preventing abuse of a free, inference-cost tool' },
     ],
 
+    guardrails: [
+      { rule: 'Output must be positioned as a starting point, not a final document', reason: 'PRDs require human judgment on strategy, priorities, and stakeholder context that cannot come from a form input' },
+      { rule: 'Model must not invent stakeholder names, systems, or org structures', reason: 'Enterprise PRDs reference real teams and real tech — hallucinated specifics would make the document unusable and damage credibility' },
+      { rule: 'Governance and compliance sections must surface decisions for human review, not make them', reason: 'Regulatory decisions in enterprise AI require legal and risk team sign-off — the model frames the questions, not the answers' },
+    ],
+
+    hallucinationRisks: [
+      { risk: 'Model invents specific metrics or benchmarks not grounded in the input', likelihood: 'High', mitigation: 'Eval check: every metric in the output must reference the stated initiative type; generic benchmarks flagged as low-quality output' },
+      { risk: 'Model generates plausible-sounding governance steps that do not apply to the user\'s industry', likelihood: 'Medium', mitigation: 'System prompt anchors governance to the stated deployment context (enterprise, regulated, or SME); out-of-scope clauses are filtered' },
+      { risk: 'Model overstates confidence in cost or timeline estimates', likelihood: 'High', mitigation: 'All numeric estimates include an explicit "subject to scoping" disclaimer in the output template' },
+    ],
+
     v2Changes: [
       'Export directly to Notion or Google Docs — copy-paste is the biggest friction point after generation',
       'Section-level regeneration — rerun a single section without regenerating the full PRD',
@@ -346,6 +381,18 @@ export const projects = [
       { mode: 'Empty email snippet', impact: 'Medium', mitigation: 'Gmail snippet field always populates for real emails — edge case for unusual email clients' },
       { mode: 'Groq API downtime', impact: 'Low', mitigation: 'Free tier has 99%+ uptime; production version would add error handling route in Make' },
       { mode: 'Wrong tone for email type', impact: 'Medium', mitigation: 'System prompt tuned per use case — recruitment, client work, and support each get their own prompt variant' },
+    ],
+
+    guardrails: [
+      { rule: 'Drafts only — model must never send an email automatically', reason: 'Human review before sending is non-negotiable; an AI-sent reply with wrong tone or content cannot be unsent' },
+      { rule: 'Reply must address the content of the incoming email, not generic filler', reason: 'A template-style reply that ignores the email content defeats the purpose and damages professional relationships' },
+      { rule: 'Reply length capped at 80 words via system prompt', reason: 'Overly long AI replies are a common tell; keeping replies concise maintains the impression of a human author' },
+    ],
+
+    hallucinationRisks: [
+      { risk: 'Model invents details about the sender or their company not present in the email', likelihood: 'Medium', mitigation: 'System prompt restricts model to responding only to content explicitly in the email snippet; no web search or external context allowed' },
+      { risk: 'Model agrees to commitments or meeting times on behalf of the user', likelihood: 'High', mitigation: 'System prompt explicitly prohibits confirming dates, prices, or agreements — draft is flagged for these cases' },
+      { risk: 'Model generates a reply that sounds generic and AI-written', likelihood: 'Medium', mitigation: 'Tone instruction in system prompt anchors reply to first-person voice; tested against 5 real emails before go-live' },
     ],
 
     v2Changes: [

@@ -286,6 +286,54 @@ export default function ProjectPage() {
           </div>
         </Section>
 
+        {/* Guardrails */}
+        {project.guardrails && (
+          <Section title="Guardrails">
+            <div className="space-y-3">
+              {project.guardrails.map((g, i) => (
+                <div key={i} className="bg-surface border border-border rounded-lg p-5">
+                  <p className="font-semibold text-sm mb-1">{g.rule}</p>
+                  <p className="text-muted text-sm">{g.reason}</p>
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        {/* Hallucination Risks */}
+        {project.hallucinationRisks && (
+          <Section title="Hallucination Risks & Mitigation">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border text-left">
+                    <th className="pb-3 font-semibold text-muted pr-6">Risk</th>
+                    <th className="pb-3 font-semibold text-muted pr-6">Likelihood</th>
+                    <th className="pb-3 font-semibold text-muted">Mitigation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {project.hallucinationRisks.map((h, i) => (
+                    <tr key={i} className="border-b border-border last:border-0">
+                      <td className="py-3 pr-6 text-text">{h.risk}</td>
+                      <td className="py-3 pr-6">
+                        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                          h.likelihood === 'High' ? 'bg-red-50 text-red-600 border border-red-200' :
+                          h.likelihood === 'Medium' ? 'bg-yellow-50 text-yellow-600 border border-yellow-200' :
+                          'bg-gray-50 text-gray-500 border border-gray-200'
+                        }`}>
+                          {h.likelihood}
+                        </span>
+                      </td>
+                      <td className="py-3 text-muted">{h.mitigation}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Section>
+        )}
+
         {/* V2 */}
         <Section title="What V2 Would Include">
           <ul className="space-y-3">

@@ -60,6 +60,29 @@ const tools = [
   },
 ]
 
+const comingSoon = [
+  {
+    title: 'User Research Synthesizer',
+    description: 'Paste interview transcripts and get synthesised themes, pain points, and opportunity areas — in minutes instead of days.',
+    tag: 'AI Tool',
+  },
+  {
+    title: 'Stakeholder Update Generator',
+    description: 'Feed sprint data and metrics — get an exec-ready update in Slack, email, or slide format. Never write status updates from scratch again.',
+    tag: 'AI Tool',
+  },
+  {
+    title: 'Competitive Intelligence Pipeline',
+    description: 'Input competitors — get a structured brief: features, pricing, positioning, and customer complaints. Re-run anytime for fresh data.',
+    tag: 'AI Tool',
+  },
+  {
+    title: 'PM Interview Coach',
+    description: 'Feed your experience and a target JD. Get the best stories to tell per competency, STAR drafts, and specific gap analysis.',
+    tag: 'AI Tool',
+  },
+]
+
 const caseStudyItems = projects.map((p) => ({
   title: p.title,
   description: p.hero.problem,
@@ -70,7 +93,7 @@ const caseStudyItems = projects.map((p) => ({
   duration: p.duration,
 }))
 
-const allWork = [...caseStudyItems, ...tools]
+const liveItems = [...caseStudyItems, ...tools]
 
 const tagStyles = {
   'Case Study': 'bg-navy-light text-navy border-navy/20',
@@ -92,9 +115,9 @@ export default function Work() {
           </p>
         </div>
 
-        {/* Grid */}
+        {/* Live items grid */}
         <div className="grid md:grid-cols-3 gap-6">
-          {allWork.map((item) => (
+          {liveItems.map((item) => (
             <Link
               key={item.title}
               to={item.link}
@@ -105,9 +128,10 @@ export default function Work() {
                 <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${tagStyles[item.tag] || 'bg-navy-light text-navy border-navy/20'}`}>
                   {item.tag}
                 </span>
-                {item.impact && (
-                  <span className="text-xs text-muted">{item.impact}</span>
-                )}
+                <span className="text-xs font-medium text-green-600 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
+                  Live
+                </span>
               </div>
 
               {/* Content */}
@@ -128,6 +152,34 @@ export default function Work() {
                 )}
               </div>
             </Link>
+          ))}
+
+          {/* Coming Soon placeholders */}
+          {comingSoon.map((item) => (
+            <div
+              key={item.title}
+              className="bg-bg border border-border rounded-xl p-7 flex flex-col opacity-60 cursor-default"
+            >
+              {/* Top row */}
+              <div className="flex items-start justify-between mb-4">
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full border bg-gray-50 text-gray-400 border-gray-200">
+                  {item.tag}
+                </span>
+                <span className="text-xs font-medium text-muted">Coming Soon</span>
+              </div>
+
+              {/* Content */}
+              <h3 className="text-text text-base font-semibold mb-3 leading-snug">
+                {item.title}
+              </h3>
+              <p className="text-muted text-sm leading-relaxed flex-1">
+                {item.description}
+              </p>
+
+              <div className="mt-6">
+                <span className="text-xs text-muted">In progress</span>
+              </div>
+            </div>
           ))}
         </div>
 

@@ -95,7 +95,7 @@ const comingSoon = [
 ]
 
 const caseStudyScreenshots = {
-  'cv-screener': imgCsCv,
+  'cv-screening-workflow': imgCsCv,
 }
 
 const caseStudyItems = projects.map((p) => ({

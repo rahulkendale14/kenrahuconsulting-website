@@ -115,7 +115,7 @@ export default function MetricsPreview({ result, formData, onUnlock }) {
                   <input type="email" placeholder="your@email.com" value={email} onChange={e => { setEmail(e.target.value); setError('') }} required
                     className="w-full bg-bg border border-border focus:border-navy rounded-lg px-4 py-3 text-text placeholder-muted/50 outline-none transition-colors text-sm" />
                   {error && <p className="text-red-600 text-xs text-left">{error}</p>}
-                  <button type="submit" className="w-full bg-navy hover:bg-navy-dark text-white font-semibold py-3 rounded-lg transition-colors text-sm">
+                  <button type="submit" className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3 rounded-lg transition-colors text-sm">
                     Unlock Full Framework →
                   </button>
                 </form>

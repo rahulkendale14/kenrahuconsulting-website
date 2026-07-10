@@ -258,7 +258,7 @@ export default function ExperienceCalculator() {
 
             <button
               onClick={handleAddCompany}
-              className="w-full bg-navy hover:bg-navy-dark text-white font-semibold py-3 rounded-xl text-sm transition-colors"
+              className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3 rounded-xl text-sm transition-colors"
             >
               Save This Company
             </button>
@@ -271,7 +271,7 @@ export default function ExperienceCalculator() {
             <div className="flex gap-3 justify-center flex-wrap">
               <button
                 onClick={() => setView('form')}
-                className="bg-navy hover:bg-navy-dark text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors"
+                className="bg-blue-300 hover:bg-blue-400 text-black font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors"
               >
                 + Add Another Company
               </button>
@@ -292,8 +292,8 @@ export default function ExperienceCalculator() {
             </h2>
 
             <div className="bg-gradient-to-br from-navy to-navy-dark rounded-xl p-6 text-center mb-6">
-              <p className="text-white/70 text-xs uppercase tracking-widest font-semibold mb-1">Total Experience</p>
-              <p className="text-white text-3xl font-bold">{formatExp(totalYears, totalMonthsRem)}</p>
+              <p className="text-black/70 text-xs uppercase tracking-widest font-semibold mb-1">Total Experience</p>
+              <p className="text-black text-3xl font-bold">{formatExp(totalYears, totalMonthsRem)}</p>
             </div>
 
             {sortedSkills.length > 0 && (

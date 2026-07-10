@@ -153,7 +153,7 @@ export default function MetricsForm({ onSubmit }) {
           </div>
         </div>
 
-        <button type="submit" className="w-full bg-navy hover:bg-navy-dark text-white font-semibold py-3.5 rounded-lg transition-colors text-base">
+        <button type="submit" className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base">
           Generate My Metrics Framework →
         </button>
         <p className="text-muted/60 text-xs text-center">9 metric areas · Leading + lagging split · Usually 15–20 seconds</p>

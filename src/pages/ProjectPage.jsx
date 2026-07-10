@@ -170,7 +170,7 @@ export default function ProjectPage() {
               <p className="text-sm text-muted">This tool is live and free to use — no signup required.</p>
               <Link
                 to={project.toolLink}
-                className="shrink-0 bg-navy hover:bg-navy-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
+                className="shrink-0 bg-blue-300 hover:bg-blue-400 text-black text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
               >
                 {project.toolLabel} →
               </Link>
@@ -354,7 +354,7 @@ export default function ProjectPage() {
             href="https://calendly.com/kendale-rahul/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-navy hover:bg-navy-dark text-white text-sm font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-block bg-blue-300 hover:bg-blue-400 text-black text-sm font-semibold px-6 py-3 rounded-lg transition-colors"
           >
             Book a Call
           </a>

@@ -213,7 +213,7 @@ export default function WorkCarousel() {
 
                 <Link
                   to={carouselItems[current].link}
-                  className="inline-flex items-center gap-2 bg-navy text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-navy-dark transition-colors"
+                  className="inline-flex items-center gap-2 bg-blue-300 text-black text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-400 transition-colors"
                 >
                   {carouselItems[current].tag === 'Case Study' ? 'Read case study' : 'Open tool'}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

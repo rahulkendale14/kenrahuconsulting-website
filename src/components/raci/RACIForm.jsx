@@ -138,7 +138,7 @@ export default function RACIForm({ onSubmit }) {
           {errors.departments && <p className="text-red-600 text-xs mt-2">{errors.departments}</p>}
         </div>
 
-        <button type="submit" className="w-full bg-navy hover:bg-navy-dark text-white font-semibold py-3.5 rounded-lg transition-colors text-base">
+        <button type="submit" className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base">
           Build My RACI Matrix →
         </button>
         <p className="text-muted/60 text-xs text-center">5 activity categories · 13 enterprise roles · Usually 15–20 seconds</p>

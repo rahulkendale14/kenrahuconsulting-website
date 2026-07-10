@@ -148,7 +148,7 @@ export default function Process() {
                   {/* Phase row */}
                   <div className="flex gap-6 group">
                     <div className="flex flex-col items-center shrink-0">
-                      <div className="w-10 h-10 rounded-full bg-surface border-2 border-navy text-navy text-sm font-bold flex items-center justify-center z-10 group-hover:bg-navy group-hover:text-white transition-colors">
+                      <div className="w-10 h-10 rounded-full bg-surface border-2 border-navy text-navy text-sm font-bold flex items-center justify-center z-10 group-hover:bg-navy group-hover:text-black transition-colors">
                         {phase.n}
                       </div>
                       {idx < phases.length - 1 && !gates[phase.n] && (
@@ -243,7 +243,7 @@ export default function Process() {
               href="https://calendly.com/kendale-rahul/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-navy hover:bg-navy-dark text-white text-sm font-semibold px-7 py-3 rounded-lg transition-colors"
+              className="bg-blue-300 hover:bg-blue-400 text-black text-sm font-semibold px-7 py-3 rounded-lg transition-colors"
             >
               Book a Free Call
             </a>

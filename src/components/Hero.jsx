@@ -42,8 +42,7 @@ export default function Hero() {
             <motion.div {...fadeUp(0.4)} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a
                 href="#work"
-                className="bg-navy font-semibold px-8 py-3.5 rounded-xl transition-all text-sm hover:bg-navy-dark glow-purple"
-                style={{ color: '#000000' }}
+                className="bg-blue-300 text-black font-semibold px-8 py-3.5 rounded-xl transition-all text-sm hover:bg-blue-400 glow-purple"
               >
                 View Tools I've Built
               </a>

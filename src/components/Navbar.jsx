@@ -27,8 +27,7 @@ export default function Navbar() {
             href="https://calendly.com/kendale-rahul/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-navy text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-navy-dark transition-colors glow-purple"
-            style={{ color: '#000000' }}
+            className="bg-blue-300 text-black text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-400 transition-colors glow-purple"
           >
             Hire Me
           </a>
@@ -57,8 +56,7 @@ export default function Navbar() {
             href="https://calendly.com/kendale-rahul/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-navy text-sm font-semibold px-5 py-2.5 rounded-lg text-center hover:bg-navy-dark transition-colors"
-            style={{ color: '#000000' }}
+            className="bg-blue-300 text-black text-sm font-semibold px-5 py-2.5 rounded-lg text-center hover:bg-blue-400 transition-colors"
           >
             Hire Me
           </a>

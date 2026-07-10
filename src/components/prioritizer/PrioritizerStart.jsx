@@ -43,7 +43,7 @@ export default function PrioritizerStart({ onStart }) {
           </div>
         </div>
 
-        <button onClick={onStart} className="w-full bg-navy hover:bg-navy-dark text-white font-semibold py-3.5 rounded-lg transition-colors text-base">
+        <button onClick={onStart} className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base">
           Prioritise My Use Cases →
         </button>
         <p className="text-muted/60 text-xs mt-4">Takes 1 minute · No signup required upfront</p>

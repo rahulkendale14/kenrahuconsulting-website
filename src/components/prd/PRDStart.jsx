@@ -51,7 +51,7 @@ export default function PRDStart({ onStart }) {
 
         <button
           onClick={onStart}
-          className="w-full bg-navy hover:bg-navy-dark text-white font-semibold py-3.5 rounded-lg transition-colors text-base"
+          className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base"
         >
           Generate My Enterprise PRD →
         </button>

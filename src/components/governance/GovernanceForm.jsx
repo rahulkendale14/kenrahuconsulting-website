@@ -125,7 +125,7 @@ export default function GovernanceForm({ onSubmit }) {
             className="w-full bg-surface border border-border focus:border-navy rounded-lg px-4 py-3 text-text placeholder-muted/50 outline-none transition-colors text-sm" />
         </div>
 
-        <button type="submit" className="w-full bg-navy hover:bg-navy-dark text-white font-semibold py-3.5 rounded-lg transition-colors text-base">
+        <button type="submit" className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base">
           Generate My Governance Checklist →
         </button>
         <p className="text-muted/60 text-xs text-center">Depth scales to your risk level · Usually 15–20 seconds · Free</p>

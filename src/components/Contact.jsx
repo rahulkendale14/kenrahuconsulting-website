@@ -34,8 +34,7 @@ export default function Contact() {
               href="https://calendly.com/kendale-rahul/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-navy font-semibold px-8 py-3.5 rounded-xl transition-all text-sm hover:bg-navy-dark glow-purple"
-                style={{ color: '#000000' }}
+              className="bg-blue-300 text-black font-semibold px-8 py-3.5 rounded-xl transition-all text-sm hover:bg-blue-400 glow-purple"
             >
               📅 Book a 30-min Call
             </a>

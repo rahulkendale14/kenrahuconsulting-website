@@ -196,7 +196,7 @@ export default function MetricsOutput({ result, formData, onRestart }) {
             <p className="text-muted text-xs mt-0.5">I design metrics frameworks for enterprise AI programs.</p>
           </div>
           <a href="https://calendly.com/kendale-rahul/30min" target="_blank" rel="noopener noreferrer"
-            className="flex-shrink-0 bg-blue-300 hover:bg-blue-400 text-black font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm">
+            className="flex-shrink-0 bg-blue-300 hover:bg-blue-400 text-navy-dark font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm">
             Book a Free Audit →
           </a>
         </div>

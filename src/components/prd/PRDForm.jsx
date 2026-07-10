@@ -103,7 +103,7 @@ export default function PRDForm({ onSubmit }) {
                   <button key={fn} type="button" onClick={() => handleCheckbox(fn)}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg border text-left text-sm transition-all ${selected ? 'border-navy bg-navy/5 text-text' : 'border-border bg-surface text-muted hover:border-navy/50 hover:text-text'}`}>
                     <div className={`w-4 h-4 rounded flex-shrink-0 flex items-center justify-center border transition-all ${selected ? 'bg-navy border-navy' : 'border-border'}`}>
-                      {selected && <svg className="w-2.5 h-2.5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      {selected && <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
                     </div>
                     {fn}
                   </button>
@@ -123,7 +123,7 @@ export default function PRDForm({ onSubmit }) {
             </select>
           </div>
 
-          <button type="submit" className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base mt-2">
+          <button type="submit" className="w-full bg-blue-300 hover:bg-blue-400 text-navy-dark font-semibold py-3.5 rounded-lg transition-colors text-base mt-2">
             Generate Enterprise PRD →
           </button>
           <p className="text-muted/60 text-xs text-center">12 sections — stakeholder RACI, governance, and measurement framework</p>

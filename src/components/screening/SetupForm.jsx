@@ -111,7 +111,7 @@ export default function SetupForm({ onGenerate }) {
           </select>
         </div>
 
-        <button type="submit" className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base mt-2">
+        <button type="submit" className="w-full bg-blue-300 hover:bg-blue-400 text-navy-dark font-semibold py-3.5 rounded-lg transition-colors text-base mt-2">
           Generate Shareable Link →
         </button>
       </form>

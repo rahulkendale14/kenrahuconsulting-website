@@ -80,7 +80,7 @@ export default function CVSubmitForm({ role, onSubmit, loading }) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-300 hover:bg-blue-400 disabled:opacity-60 disabled:cursor-not-allowed text-black font-semibold py-3.5 rounded-lg transition-colors text-base"
+          className="w-full bg-blue-300 hover:bg-blue-400 disabled:opacity-60 disabled:cursor-not-allowed text-navy-dark font-semibold py-3.5 rounded-lg transition-colors text-base"
         >
           {loading ? 'Screening your CV...' : 'Screen My CV →'}
         </button>

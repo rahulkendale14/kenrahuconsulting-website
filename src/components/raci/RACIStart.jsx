@@ -54,7 +54,7 @@ export default function RACIStart({ onStart }) {
 
         <button
           onClick={onStart}
-          className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base"
+          className="w-full bg-blue-300 hover:bg-blue-400 text-navy-dark font-semibold py-3.5 rounded-lg transition-colors text-base"
         >
           Build My RACI Matrix →
         </button>

@@ -105,11 +105,11 @@ export default function PRDOutput({ prd, formData, onRestart }) {
           <button
             onClick={handleDownloadPDF}
             disabled={downloading}
-            className="flex-1 flex items-center justify-center gap-2 bg-blue-300 hover:bg-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-black font-medium py-3 rounded-lg transition-colors text-sm"
+            className="flex-1 flex items-center justify-center gap-2 bg-blue-300 hover:bg-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-navy-dark font-medium py-3 rounded-lg transition-colors text-sm"
           >
             {downloading ? (
               <>
-                <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-navy-dark/30 border-t-navy-dark rounded-full animate-spin"></div>
                 Downloading...
               </>
             ) : (

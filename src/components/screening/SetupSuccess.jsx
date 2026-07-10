@@ -30,7 +30,7 @@ export default function SetupSuccess({ shareUrl, onReset }) {
 
         <button
           onClick={handleCopy}
-          className="w-full bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3.5 rounded-lg transition-colors text-base mb-4"
+          className="w-full bg-blue-300 hover:bg-blue-400 text-navy-dark font-semibold py-3.5 rounded-lg transition-colors text-base mb-4"
         >
           {copied ? '✓ Copied to Clipboard' : 'Copy Link'}
         </button>

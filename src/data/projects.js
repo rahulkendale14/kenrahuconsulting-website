@@ -277,4 +277,142 @@ export const projects = [
       { label: 'Eval Test Cases (3 initiatives)', available: false },
     ],
   },
+  {
+    slug: 'ai-servicing-triage',
+    title: 'AI Servicing Triage & Decision Support',
+    subtitle: 'Taking an LLM from business case to governed production inside a regulated bank — 22% less manual support dependency',
+    tags: ['GenAI in Production', 'AI Governance', 'Digital Banking'],
+    status: 'Shipped',
+    duration: 'Phased rollout',
+    impact: '22% less manual effort',
+
+    hero: {
+      client: 'Global financial services firm (anonymised)',
+      industry: 'Banking & Financial Services',
+      teamSize: 'Multiple workstreams, cross-functional',
+      problem:
+        'Customer servicing requests arrived as unstructured free text and were categorised and routed by hand. Volume made the manual step expensive, and misrouting sent cases to the wrong queue — where they waited before anyone noticed.',
+    },
+
+    problem: {
+      summary:
+        'Manual triage of servicing requests was both a cost line and a service-quality problem. Every misrouted case paid a double penalty: the time spent handling it in the wrong queue, plus the delay before it reached the right one. The obvious fix — an LLM that reads the request and routes it — was easy to prototype and hard to get approved. In a regulated environment, "the model is usually right" is not an answer anyone will sign off on.',
+      // NOTE FOR RAHUL: replace these with things people actually said, or delete the quotes
+      // array entirely. Do not publish invented quotes attributed to real colleagues.
+      quotes: [
+        { text: 'Placeholder — replace with a real quote or remove.', role: 'Servicing Operations' },
+        { text: 'Placeholder — replace with a real quote or remove.', role: 'Risk & Controls' },
+      ],
+      rootCauses: [
+        'Categorisation depended on individual judgement, so the same request could be routed differently by different people',
+        'Misroutes were only discovered downstream, after the delay had already been incurred',
+        'Reporting on triage quality was manual, so nobody could see the size of the problem in real time',
+      ],
+    },
+
+    product: {
+      summary:
+        'An LLM-assisted categorisation and routing layer that proposes a category and a confidence score for each incoming servicing request. The design assumption was not that the model would be right — it was that the model would sometimes be wrong, and the system had to behave correctly when it was.',
+      components: [
+        {
+          name: 'Categorisation & Routing Engine',
+          description: 'LLM-assisted classification of free-text servicing requests into the existing routing taxonomy, returning a category plus a confidence score.',
+        },
+        {
+          name: 'Confidence-Based Override Thresholds',
+          description: 'Below a defined confidence level, the request does not auto-route. The threshold is a product decision, tuned against observed accuracy — not a fixed constant.',
+        },
+        {
+          name: 'Human-in-the-Loop Review',
+          description: 'Low-confidence and high-risk categories always route to a human reviewer before action. High-risk is defined by business impact, not by model uncertainty alone.',
+        },
+        {
+          name: 'Accuracy & Override Instrumentation',
+          description: 'Categorisation accuracy and override rate are tracked continuously and surfaced to stakeholders — the same numbers that gated each rollout phase.',
+        },
+      ],
+    },
+
+    keyDecisions: [
+      {
+        decision: 'Write the governance design before the business case',
+        rationale:
+          'The approval blocker in a regulated environment is never "will it work" — it is "what happens when it does not". Defining override thresholds and human-in-the-loop review up front meant the business case could be reviewed on its merits instead of stalling on unanswered risk questions.',
+        tradeoff: 'Slower to a first demo. Dramatically faster to an approved rollout.',
+      },
+      {
+        decision: 'Make the rollout gate a number, not a date',
+        rationale:
+          'Each expansion phase was gated on observed categorisation accuracy and override rate rather than a calendar milestone. When the numbers held, we expanded scope. When they did not, we stopped and looked at why.',
+        tradeoff: 'Less predictable timeline for stakeholders — traded for the ability to defend every expansion decision with evidence.',
+      },
+      {
+        decision: 'Treat the override rate as a product metric, not a failure count',
+        rationale:
+          'A falling override rate is the clearest signal that the system is earning trust in production. A rising one is an early warning that something upstream has shifted. Framing overrides as signal rather than embarrassment kept reviewers reporting them honestly.',
+        tradeoff: 'Required explaining to stakeholders why a non-zero override rate is a healthy target rather than a defect.',
+      },
+      {
+        decision: 'Keep the human decision, automate the preparation',
+        rationale:
+          'The system proposes; a person decides in every case that carries real risk. This is what made the capability approvable, and it is also what made the efficiency gain durable — nobody had to unwind it later after an incident.',
+        tradeoff: 'Ceiling on theoretical automation. Floor under actual risk.',
+      },
+    ],
+
+    evalFramework: {
+      summary:
+        'Quality was validated through the rollout itself rather than in a one-off pre-launch test. Each phase produced the evidence that justified the next.',
+      stages: [
+        {
+          name: 'Baseline & Business Case',
+          description: 'Quantified the cost of manual triage and the downstream impact of misrouting, so that any improvement could be measured against a number that existed before the project started.',
+        },
+        {
+          name: 'Supervised Phase',
+          description: 'Human-supervised operation with accuracy and override rate tracked from day one. The goal was not throughput — it was building a defensible evidence base.',
+        },
+        {
+          name: 'Phased Expansion',
+          description: 'Scope widened only where accuracy and override rates supported it, with each phase treated as an explicit go/no-go decision rather than a rollout schedule.',
+        },
+      ],
+    },
+
+    failureModes: [
+      {
+        mode: 'Confident but wrong categorisation',
+        impact: 'High',
+        mitigation: 'Confidence thresholds plus mandatory human review on high-risk categories, so a high-confidence error still meets a person before it has consequences.',
+      },
+      {
+        mode: 'Silent drift in request patterns',
+        impact: 'High',
+        mitigation: 'Continuous accuracy and override-rate tracking, so a change in the input distribution shows up as a moving metric rather than a rising complaint volume.',
+      },
+      {
+        mode: 'Over-reliance by reviewers',
+        impact: 'Medium',
+        mitigation: 'Override treated as expected behaviour and monitored as a metric — a suspiciously low override rate is investigated, not celebrated.',
+      },
+      {
+        mode: 'Scope expansion outrunning evidence',
+        impact: 'Medium',
+        mitigation: 'Each phase gated on its own measured performance, with expansion blocked until the numbers for the current scope held.',
+      },
+    ],
+
+    v2Changes: [
+      'Formal eval harness with a versioned, labelled test set so prompt and model changes can be regression-tested before release',
+      'Model routing by request complexity — a smaller model for the routine majority, escalating only where it earns its cost',
+      'Explicit kill-switch runbook: what the system falls back to, who can trigger it, and how quickly a trigger is noticed',
+      'Reviewer-facing explanation of why a category was proposed, to speed up the human decision rather than just presenting it',
+    ],
+
+    documents: [
+      { label: 'AI Governance Design Summary', available: false },
+      { label: 'Rollout Gate Criteria', available: false },
+      { label: 'Failure Mode Register', available: false },
+    ],
+  },
 ]

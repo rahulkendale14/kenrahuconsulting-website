@@ -14,7 +14,7 @@ function Section({ title, children }) {
 
 function Tag({ children }) {
   return (
-    <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">
+    <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-navy-light text-navy border border-navy/20">
       {children}
     </span>
   )
@@ -26,11 +26,11 @@ export default function ProjectPage() {
 
   if (!project) {
     return (
-      <div className="bg-bg text-white min-h-screen flex flex-col">
+      <div className="bg-bg text-text min-h-screen flex flex-col">
         <Navbar />
         <div className="flex-1 flex flex-col items-center justify-center gap-4">
           <p className="text-muted">Case study not found.</p>
-          <Link to="/portfolio" className="text-accent text-sm hover:underline">← Back to Portfolio</Link>
+          <Link to="/portfolio" className="text-navy text-sm hover:underline">← Back to Portfolio</Link>
         </div>
         <Footer />
       </div>
@@ -38,13 +38,12 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="bg-bg text-white min-h-screen">
+    <div className="bg-bg text-text min-h-screen">
       <Navbar />
 
       <main className="max-w-3xl mx-auto px-6 pt-32 pb-24">
 
-        {/* Back */}
-        <Link to="/portfolio" className="inline-flex items-center gap-1.5 text-muted text-sm hover:text-white transition-colors mb-10">
+        <Link to="/portfolio" className="inline-flex items-center gap-1.5 text-muted text-sm hover:text-text transition-colors mb-10">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
           </svg>
@@ -74,25 +73,130 @@ export default function ProjectPage() {
           </div>
         </div>
 
+        {/* Live Tool CTA */}
+        {project.toolLink && (
+          <div className="mb-14 border border-navy/20 rounded-xl overflow-hidden">
+            {/* Mock browser chrome */}
+            <div className="bg-navy/5 border-b border-navy/10 px-4 py-3 flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-red-300"></span>
+              <span className="w-3 h-3 rounded-full bg-yellow-300"></span>
+              <span className="w-3 h-3 rounded-full bg-green-300"></span>
+              <span className="ml-3 flex-1 bg-white border border-border rounded-md px-3 py-1 text-xs text-muted font-mono">
+                kenrahuconsulting.com{project.toolLink}
+              </span>
+            </div>
+
+            {/* Tool preview */}
+            <div className="bg-bg px-6 py-8">
+              <div className="max-w-md mx-auto space-y-4">
+                {project.slug === 'prd-generator' ? (
+                  <>
+                    <div className="text-center mb-6">
+                      <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Enterprise AI PRD Generator</p>
+                      <p className="text-base font-bold text-text">Tell us about your AI initiative</p>
+                      <p className="text-muted text-xs mt-1">12 sections — stakeholder RACI, governance, and measurement framework</p>
+                    </div>
+                    <div className="space-y-3">
+                      {[
+                        { label: 'AI Feature / Product Name', placeholder: 'e.g. Production Defect Triage Automation' },
+                        { label: 'Problem Being Solved', placeholder: 'What manual, high-volume pain point does this address?' },
+                        { label: 'Goals & Success Metrics', placeholder: 'e.g. Reduce MTTR by 40%, free up 20% analyst capacity' },
+                      ].map(f => (
+                        <div key={f.label}>
+                          <p className="text-xs font-medium text-text mb-1">{f.label}</p>
+                          <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60">{f.placeholder}</div>
+                        </div>
+                      ))}
+                      <div className="w-full bg-navy/10 border border-navy/20 rounded-lg px-3 py-2 text-center text-xs font-semibold text-navy">
+                        Generate Enterprise PRD →
+                      </div>
+                    </div>
+                  </>
+                ) : project.slug === 'salary-planner' ? (
+                  <>
+                    <div className="text-center mb-6">
+                      <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Salary Planner</p>
+                      <p className="text-base font-bold text-text">Income & Expenses</p>
+                      <p className="text-muted text-xs mt-1">Enter your numbers. Get a realistic monthly plan.</p>
+                    </div>
+                    <div className="space-y-3">
+                      {[
+                        { label: 'Monthly take-home salary', placeholder: '₹85,000' },
+                        { label: 'Monthly bills & EMI', placeholder: '₹20,000' },
+                        { label: 'Household expenses', placeholder: '₹15,000' },
+                      ].map(f => (
+                        <div key={f.label}>
+                          <p className="text-xs font-medium text-text mb-1">{f.label}</p>
+                          <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60">{f.placeholder}</div>
+                        </div>
+                      ))}
+                      <div className="w-full bg-navy/10 border border-navy/20 rounded-lg px-3 py-2 text-center text-xs font-semibold text-navy">
+                        Generate My Plan →
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="text-center mb-6">
+                      <p className="text-xs font-semibold text-navy uppercase tracking-widest mb-1">Recruiter Setup</p>
+                      <p className="text-base font-bold text-text">Configure Your CV Screener</p>
+                      <p className="text-muted text-xs mt-1">Set your criteria once. Share the link. AI screens every CV.</p>
+                    </div>
+                    <div className="space-y-3">
+                      {[
+                        { label: 'Job Role', placeholder: 'e.g. Senior Product Manager' },
+                        { label: 'Job Requirements', placeholder: '- 3+ years PM experience\n- Strong data skills...', textarea: true },
+                        { label: 'Your Email', placeholder: 'you@yourcompany.com' },
+                      ].map(f => (
+                        <div key={f.label}>
+                          <p className="text-xs font-medium text-text mb-1">{f.label}</p>
+                          {f.textarea
+                            ? <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60 h-16 font-mono">{f.placeholder}</div>
+                            : <div className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-xs text-muted/60">{f.placeholder}</div>
+                          }
+                        </div>
+                      ))}
+                      <div className="w-full bg-navy/10 border border-navy/20 rounded-lg px-3 py-2 text-center text-xs font-semibold text-navy">
+                        Generate Shareable Link →
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* CTA bar */}
+            <div className="bg-surface border-t border-navy/10 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="text-sm text-muted">This tool is live and free to use — no signup required.</p>
+              <Link
+                to={project.toolLink}
+                className="shrink-0 bg-blue-300 hover:bg-blue-400 text-navy-dark text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
+              >
+                {project.toolLabel} →
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* Problem */}
         <Section title="The Problem">
           <p className="text-muted leading-relaxed mb-6">{project.problem.summary}</p>
 
           <div className="space-y-4 mb-6">
             {project.problem.quotes.map((q, i) => (
-              <blockquote key={i} className="border-l-2 border-accent pl-5">
-                <p className="text-white italic mb-1">"{q.text}"</p>
+              <blockquote key={i} className="border-l-2 border-navy pl-5">
+                <p className="text-text italic mb-1">"{q.text}"</p>
                 <p className="text-muted text-sm">— {q.role}</p>
               </blockquote>
             ))}
           </div>
 
           <div className="bg-surface border border-border rounded-lg p-5">
-            <p className="text-sm font-semibold mb-3 text-white">Root causes identified</p>
+            <p className="text-sm font-semibold mb-3">Root causes identified</p>
             <ul className="space-y-2">
               {project.problem.rootCauses.map((cause, i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted">
-                  <span className="text-accent mt-0.5 shrink-0">→</span>
+                  <span className="text-navy mt-0.5 shrink-0">→</span>
                   {cause}
                 </li>
               ))}
@@ -117,7 +221,7 @@ export default function ProjectPage() {
         <Section title="Key Decisions">
           <div className="space-y-6">
             {project.keyDecisions.map((d, i) => (
-              <div key={i} className="border border-border rounded-lg p-6">
+              <div key={i} className="border border-border rounded-lg p-6 bg-surface">
                 <p className="font-bold mb-3">{d.decision}</p>
                 <p className="text-muted text-sm leading-relaxed mb-3">{d.rationale}</p>
                 <div className="bg-bg border border-border rounded-md px-4 py-3">
@@ -136,7 +240,7 @@ export default function ProjectPage() {
             {project.evalFramework.stages.map((s, i) => (
               <div key={i} className="flex gap-4">
                 <div className="flex flex-col items-center">
-                  <div className="w-7 h-7 rounded-full bg-accent/20 border border-accent/40 text-accent text-xs font-bold flex items-center justify-center shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-navy-light border border-navy/30 text-navy text-xs font-bold flex items-center justify-center shrink-0">
                     {i + 1}
                   </div>
                   {i < project.evalFramework.stages.length - 1 && (
@@ -166,10 +270,10 @@ export default function ProjectPage() {
               <tbody>
                 {project.failureModes.map((f, i) => (
                   <tr key={i} className="border-b border-border last:border-0">
-                    <td className="py-3 pr-6 text-white">{f.mode}</td>
+                    <td className="py-3 pr-6 text-text">{f.mode}</td>
                     <td className="py-3 pr-6">
                       <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
-                        f.impact === 'High' ? 'bg-red-500/15 text-red-400' : 'bg-yellow-500/15 text-yellow-400'
+                        f.impact === 'High' ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-yellow-50 text-yellow-600 border border-yellow-200'
                       }`}>
                         {f.impact}
                       </span>
@@ -187,7 +291,7 @@ export default function ProjectPage() {
           <ul className="space-y-3">
             {project.v2Changes.map((item, i) => (
               <li key={i} className="flex gap-3 text-sm text-muted">
-                <span className="text-accent shrink-0 mt-0.5">◆</span>
+                <span className="text-navy shrink-0 mt-0.5">◆</span>
                 {item}
               </li>
             ))}
@@ -202,7 +306,7 @@ export default function ProjectPage() {
             href="https://calendly.com/kendale-rahul/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-accent hover:bg-accent-dark text-white text-sm font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-block bg-blue-300 hover:bg-blue-400 text-navy-dark text-sm font-semibold px-6 py-3 rounded-lg transition-colors"
           >
             Book a Call
           </a>

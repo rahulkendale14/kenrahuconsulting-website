@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-// ─── LOGIC ────────────────────────────────────────────────────────────────────
-
 function toYearsMonths(totalMonths) {
   return { years: Math.floor(totalMonths / 12), months: totalMonths % 12 }
 }
@@ -40,15 +38,12 @@ function validateCompanyForm(name, years, months, skills, totalMonths) {
   return null
 }
 
-// ─── COMPONENT ────────────────────────────────────────────────────────────────
-
 const emptySkill = () => ({ id: Date.now() + Math.random(), name: '', months: '' })
 
 export default function ExperienceCalculator() {
   const [companies, setCompanies] = useState([])
-  const [view, setView] = useState('form') // 'form' | 'prompt' | 'results'
+  const [view, setView] = useState('form')
 
-  // Form state
   const [companyName, setCompanyName] = useState('')
   const [expYears, setExpYears] = useState('')
   const [expMonths, setExpMonths] = useState('')
@@ -109,52 +104,45 @@ export default function ExperienceCalculator() {
     setView('form')
   }
 
-  // ─── RESULTS DATA ──────────────────────────────────────────────────────────
-
   const totalMonths = companies.reduce((sum, c) => sum + c.totalMonths, 0)
   const { years: totalYears, months: totalMonthsRem } = toYearsMonths(totalMonths)
   const skillMap = aggregateSkills(companies)
   const sortedSkills = Object.values(skillMap).sort((a, b) => b.months - a.months)
 
-  // ─── RENDER ────────────────────────────────────────────────────────────────
-
   return (
-    <div className="min-h-screen bg-bg text-white">
-      {/* Top bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0F0F0F]/80 border-b border-[#2A2A2A]">
+    <div className="min-h-screen bg-bg text-text">
+      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/90 border-b border-border">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="text-muted hover:text-white text-sm transition-colors">
-            ← kenrahu.com
+          <Link to="/" className="text-muted hover:text-text text-sm transition-colors">
+            ← Back to home
           </Link>
-          <span className="text-xs text-muted/60 font-medium uppercase tracking-widest">Experience Calculator</span>
+          <span className="text-xs text-muted font-medium uppercase tracking-widest">Experience Calculator</span>
           <div className="w-24" />
         </div>
       </div>
 
       <div className="max-w-2xl mx-auto px-6 pt-28 pb-20">
-        {/* Header */}
         <div className="text-center mb-10">
-          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">Free Tool</p>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-3">Experience Calculator</h1>
+          <p className="text-navy text-sm font-semibold uppercase tracking-widest mb-3">Free Tool</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-text mb-3">Experience Calculator</h1>
           <p className="text-muted text-sm">
             Add each company you've worked at — get your total and skill-wise experience instantly.
           </p>
         </div>
 
-        {/* Companies added so far */}
         {companies.length > 0 && (
           <div className="mb-6 space-y-3">
             {companies.map((c, index) => {
               const { years, months } = toYearsMonths(c.totalMonths)
               return (
-                <div key={index} className="bg-surface border border-[#2A2A2A] rounded-xl p-4 flex items-start justify-between">
+                <div key={index} className="bg-surface border border-border rounded-xl p-4 flex items-start justify-between">
                   <div>
-                    <p className="font-semibold text-white text-sm">{c.name}</p>
+                    <p className="font-semibold text-text text-sm">{c.name}</p>
                     <p className="text-muted text-xs mt-0.5">{formatExp(years, months)}</p>
                     {c.skills.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mt-2">
                         {c.skills.map((s, i) => (
-                          <span key={i} className="text-xs bg-accent/10 text-accent border border-accent/20 px-2.5 py-0.5 rounded-full">
+                          <span key={i} className="text-xs bg-navy-light text-navy border border-navy/20 px-2.5 py-0.5 rounded-full">
                             {s.name} — {s.months}m
                           </span>
                         ))}
@@ -163,7 +151,7 @@ export default function ExperienceCalculator() {
                   </div>
                   <button
                     onClick={() => deleteCompany(index)}
-                    className="text-muted hover:text-red-400 text-sm ml-4 transition-colors flex-shrink-0"
+                    className="text-muted hover:text-red-500 text-sm ml-4 transition-colors flex-shrink-0"
                   >
                     ✕
                   </button>
@@ -173,10 +161,9 @@ export default function ExperienceCalculator() {
           </div>
         )}
 
-        {/* Add Company Form */}
         {view === 'form' && (
-          <div className="bg-surface border border-[#2A2A2A] rounded-xl p-7">
-            <h2 className="text-base font-semibold text-accent mb-6 pb-4 border-b border-[#2A2A2A]">
+          <div className="bg-surface border border-border rounded-xl p-7">
+            <h2 className="text-base font-semibold text-navy mb-6 pb-4 border-b border-border">
               Add Company Experience
             </h2>
 
@@ -189,7 +176,7 @@ export default function ExperienceCalculator() {
                 value={companyName}
                 onChange={e => setCompanyName(e.target.value)}
                 placeholder="e.g. Infosys"
-                className="w-full bg-bg border border-[#2A2A2A] rounded-lg px-4 py-2.5 text-sm text-white placeholder-muted/50 focus:outline-none focus:border-accent transition-colors"
+                className="w-full bg-bg border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder-muted/50 focus:outline-none focus:border-navy transition-colors"
               />
             </div>
 
@@ -203,7 +190,7 @@ export default function ExperienceCalculator() {
                   min="0"
                   max="50"
                   placeholder="0"
-                  className="w-full bg-bg border border-[#2A2A2A] rounded-lg px-4 py-2.5 text-sm text-white placeholder-muted/50 focus:outline-none focus:border-accent transition-colors"
+                  className="w-full bg-bg border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder-muted/50 focus:outline-none focus:border-navy transition-colors"
                 />
               </div>
               <div className="flex-1">
@@ -215,12 +202,12 @@ export default function ExperienceCalculator() {
                   min="0"
                   max="11"
                   placeholder="0"
-                  className="w-full bg-bg border border-[#2A2A2A] rounded-lg px-4 py-2.5 text-sm text-white placeholder-muted/50 focus:outline-none focus:border-accent transition-colors"
+                  className="w-full bg-bg border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder-muted/50 focus:outline-none focus:border-navy transition-colors"
                 />
               </div>
             </div>
 
-            <div className="border-t border-[#2A2A2A] pt-5 mb-5">
+            <div className="border-t border-border pt-5 mb-5">
               <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-4">
                 Skills / Technologies Used
               </p>
@@ -237,7 +224,7 @@ export default function ExperienceCalculator() {
                       value={skill.name}
                       onChange={e => updateSkill(skill.id, 'name', e.target.value)}
                       placeholder="e.g. React, Python"
-                      className="flex-[2] bg-bg border border-[#2A2A2A] rounded-lg px-3 py-2 text-sm text-white placeholder-muted/50 focus:outline-none focus:border-accent transition-colors"
+                      className="flex-[2] bg-bg border border-border rounded-lg px-3 py-2 text-sm text-text placeholder-muted/50 focus:outline-none focus:border-navy transition-colors"
                     />
                     <input
                       type="number"
@@ -246,11 +233,11 @@ export default function ExperienceCalculator() {
                       min="0"
                       max="600"
                       placeholder="months"
-                      className="flex-1 bg-bg border border-[#2A2A2A] rounded-lg px-3 py-2 text-sm text-white placeholder-muted/50 focus:outline-none focus:border-accent transition-colors"
+                      className="flex-1 bg-bg border border-border rounded-lg px-3 py-2 text-sm text-text placeholder-muted/50 focus:outline-none focus:border-navy transition-colors"
                     />
                     <button
                       onClick={() => removeSkillRow(skill.id)}
-                      className="text-muted/50 hover:text-red-400 text-lg leading-none transition-colors w-6 text-center"
+                      className="text-muted/50 hover:text-red-500 text-lg leading-none transition-colors w-6 text-center"
                     >
                       ×
                     </button>
@@ -259,39 +246,38 @@ export default function ExperienceCalculator() {
               </div>
               <button
                 onClick={addSkillRow}
-                className="mt-3 w-full border border-dashed border-accent/30 text-accent/70 hover:text-accent hover:border-accent/60 text-sm font-medium py-2 rounded-lg transition-colors"
+                className="mt-3 w-full border border-dashed border-navy/30 text-navy/70 hover:text-navy hover:border-navy/60 text-sm font-medium py-2 rounded-lg transition-colors"
               >
                 + Add Skill
               </button>
             </div>
 
             {formError && (
-              <p className="text-red-400 text-sm mb-4">{formError}</p>
+              <p className="text-red-500 text-sm mb-4">{formError}</p>
             )}
 
             <button
               onClick={handleAddCompany}
-              className="w-full bg-accent hover:bg-accent-dark text-white font-semibold py-3 rounded-xl text-sm transition-colors"
+              className="w-full bg-blue-300 hover:bg-blue-400 text-navy-dark font-semibold py-3 rounded-xl text-sm transition-colors"
             >
               Save This Company
             </button>
           </div>
         )}
 
-        {/* Add another prompt */}
         {view === 'prompt' && (
-          <div className="bg-surface border border-[#2A2A2A] rounded-xl p-7 text-center">
+          <div className="bg-surface border border-border rounded-xl p-7 text-center">
             <p className="text-muted text-sm mb-6">Company added. Do you want to add another?</p>
             <div className="flex gap-3 justify-center flex-wrap">
               <button
                 onClick={() => setView('form')}
-                className="bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors"
+                className="bg-blue-300 hover:bg-blue-400 text-navy-dark font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors"
               >
                 + Add Another Company
               </button>
               <button
                 onClick={() => setView('results')}
-                className="border border-accent text-accent hover:bg-accent/10 font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors"
+                className="border border-navy text-navy hover:bg-navy/5 font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors"
               >
                 See My Results
               </button>
@@ -299,14 +285,13 @@ export default function ExperienceCalculator() {
           </div>
         )}
 
-        {/* Results */}
         {view === 'results' && (
-          <div className="bg-surface border border-[#2A2A2A] rounded-xl p-7">
-            <h2 className="text-base font-semibold text-accent mb-6 pb-4 border-b border-[#2A2A2A]">
+          <div className="bg-surface border border-border rounded-xl p-7">
+            <h2 className="text-base font-semibold text-navy mb-6 pb-4 border-b border-border">
               Your Experience Summary
             </h2>
 
-            <div className="bg-gradient-to-br from-accent to-purple-600 rounded-xl p-6 text-center mb-6">
+            <div className="bg-gradient-to-br from-navy to-navy-dark rounded-xl p-6 text-center mb-6">
               <p className="text-white/70 text-xs uppercase tracking-widest font-semibold mb-1">Total Experience</p>
               <p className="text-white text-3xl font-bold">{formatExp(totalYears, totalMonthsRem)}</p>
             </div>
@@ -318,9 +303,9 @@ export default function ExperienceCalculator() {
                   {sortedSkills.map(skill => {
                     const sy = toYearsMonths(skill.months)
                     return (
-                      <div key={skill.name} className="bg-bg border border-[#2A2A2A] rounded-xl p-4">
-                        <p className="text-accent text-xs font-bold mb-1">{skill.name}</p>
-                        <p className="text-white text-sm font-semibold">{formatExp(sy.years, sy.months)}</p>
+                      <div key={skill.name} className="bg-bg border border-border rounded-xl p-4">
+                        <p className="text-navy text-xs font-bold mb-1">{skill.name}</p>
+                        <p className="text-text text-sm font-semibold">{formatExp(sy.years, sy.months)}</p>
                         <p className="text-muted/60 text-xs mt-0.5">{skill.months} month{skill.months !== 1 ? 's' : ''}</p>
                       </div>
                     )
@@ -332,7 +317,7 @@ export default function ExperienceCalculator() {
             <div className="mt-6 text-center">
               <button
                 onClick={resetAll}
-                className="border border-accent text-accent hover:bg-accent/10 font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors"
+                className="border border-navy text-navy hover:bg-navy/5 font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors"
               >
                 Start Over
               </button>

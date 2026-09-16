@@ -97,7 +97,7 @@ function ScoreRing({ score }) {
   )
 }
 
-export default function QuizResults({ score, name, answers }) {
+export default function QuizResults({ score, name }) {
   const level = getLevel(score)
 
   return (

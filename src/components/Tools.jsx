@@ -2,37 +2,77 @@ import { Link } from 'react-router-dom'
 
 const tools = [
   {
+    title: 'Enterprise AI PRD Generator',
+    description: 'Generate a 12-section enterprise AI PRD — stakeholder RACI, governance framework, measurement model, and operating model. Built on a real enterprise AI program.',
+    status: 'live',
+    link: '/tools/prd-generator',
+    linkLabel: 'Generate PRD →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'AI Use Case Prioritizer',
+    description: 'Paste your AI ideas and get a scored, ranked matrix across 5 dimensions — business impact, effort, risk, data availability, and governance complexity.',
+    status: 'live',
+    link: '/tools/use-case-prioritizer',
+    linkLabel: 'Prioritise Now →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'Experience Calculator',
+    description: 'Add each company you\'ve worked at and get your total experience instantly — broken down by years, months, and skill. Built for PM interviews.',
+    status: 'live',
+    link: '/tools/experience-calculator',
+    linkLabel: 'Calculate Now →',
+    tag: 'Free Tool',
+  },
+  {
+    title: 'AI Stakeholder RACI Builder',
+    description: 'Describe your AI product and team structure. Get a complete RACI matrix across 5 activity categories — who is Responsible, Accountable, Consulted, and Informed. Built on a 13-role enterprise AI framework.',
+    status: 'live',
+    link: '/tools/raci-builder',
+    linkLabel: 'Build My RACI →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'AI Metrics Framework Generator',
+    description: 'Describe your AI product and get a complete measurement model — north star metric, leading indicators, lagging KPIs, owners, and reporting cadence across 9 areas. Built on a real enterprise AI program.',
+    status: 'live',
+    link: '/tools/metrics-framework',
+    linkLabel: 'Generate Framework →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'AI Governance Checklist Generator',
+    description: 'Describe your AI product and get a tailored governance checklist across all 5 layers — business, product, model, operational, and risk & compliance. Scaled to your risk level and deployment stage.',
+    status: 'live',
+    link: '/tools/governance-checklist',
+    linkLabel: 'Generate Checklist →',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'AI Candidate Screener',
+    description: 'Set your job criteria once. Share a link with candidates. AI screens every CV against your requirements and emails you a breakdown — automatically.',
+    status: 'live',
+    link: '/tools/cv-screening',
+    linkLabel: 'Set Up Screener →',
+    caseStudy: '/portfolio/cv-screening-workflow',
+    tag: 'AI-Powered',
+  },
+  {
+    title: 'Salary Planning Assistant',
+    description: 'Enter your monthly income and expenses. Get a clear allocation plan across 7 categories, a one-year goal check, and alternate scenarios if you\'re falling short.',
+    status: 'live',
+    link: '/tools/salary-planner',
+    linkLabel: 'Plan my salary →',
+    tag: 'Free Tool',
+  },
+  {
     title: 'AI Readiness Calculator',
     description: 'Assess your AI readiness in 2 minutes. Get a score 0–100 and a personalised action plan based on where you actually stand.',
     status: 'live',
     link: '/quiz',
     linkLabel: 'Try It Free →',
-    badge: null,
-  },
-  {
-    title: 'PRD Generator',
-    description: 'Generate a complete, professional Product Requirements Document in seconds. Powered by Claude AI — just answer 7 questions.',
-    status: 'live',
-    link: '/tools/prd-generator',
-    linkLabel: 'Generate Your PRD →',
-    badge: null,
-  },
-  {
-    title: 'Experience Calculator',
-    description: 'Add each company you\'ve worked at and get your total experience instantly — broken down by years, months, and skill.',
-    status: 'live',
-    link: '/tools/experience-calculator',
-    linkLabel: 'Calculate Now →',
-    badge: null,
-  },
-  {
-    title: 'AI Candidate Screener',
-    description: 'Set your criteria, generate a shareable link, and let AI screen candidates — MCQs, profile check, and tech questions in one flow.',
-    status: 'live',
-    link: '/tools/cv-screening',
-    linkLabel: 'Try It Free →',
-    badge: null,
-    caseStudy: '/portfolio/cv-screening-workflow',
+    tag: 'Free Tool',
   },
   {
     title: 'Fake Resume Detector',
@@ -40,7 +80,7 @@ const tools = [
     status: 'live',
     link: '/tools/fake-resume-detector',
     linkLabel: 'Detect Now →',
-    badge: null,
+    tag: 'Free Tool',
   },
   {
     title: 'Candidate Submission Writer',
@@ -48,27 +88,51 @@ const tools = [
     status: 'live',
     link: '/tools/candidate-submission-writer',
     linkLabel: 'Try It Free →',
-    badge: null,
+    tag: 'Free Tool',
   },
   {
-    title: 'AI Use Case Prioritizer',
-    description: 'Paste your list of AI ideas and get a scored, ranked matrix across 5 dimensions — impact, effort, risk, data availability, and governance complexity.',
-    status: 'live',
-    link: '/tools/use-case-prioritizer',
-    linkLabel: 'Prioritise Now →',
-    badge: null,
+    title: 'User Research Synthesizer',
+    description: 'Paste interview transcripts and get synthesised themes, pain points, and opportunity areas — in minutes instead of days.',
+    status: 'soon',
+    link: null,
+    linkLabel: null,
+    tag: 'Coming Soon',
+  },
+  {
+    title: 'Stakeholder Update Generator',
+    description: 'Feed sprint data and metrics — get an exec-ready update in Slack, email, or slide format. Never write status updates from scratch again.',
+    status: 'soon',
+    link: null,
+    linkLabel: null,
+    tag: 'Coming Soon',
+  },
+  {
+    title: 'Competitive Intelligence Pipeline',
+    description: 'Input competitors — get a structured brief: features, pricing, positioning, and customer complaints. Re-run anytime for fresh data.',
+    status: 'soon',
+    link: null,
+    linkLabel: null,
+    tag: 'Coming Soon',
+  },
+  {
+    title: 'PM Interview Coach',
+    description: 'Feed your experience and a target JD. Get the best stories to tell per competency, STAR drafts, and specific gap analysis.',
+    status: 'soon',
+    link: null,
+    linkLabel: null,
+    tag: 'Coming Soon',
   },
 ]
 
 export default function Tools() {
   return (
-    <section id="tools" className="py-24 px-6 bg-bg">
+    <section id="tools" className="py-24 px-6 bg-surface">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-4">Tools</p>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Tools I've Built</h2>
+          <p className="text-navy text-sm font-semibold uppercase tracking-widest mb-4">Portfolio</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">AI Tools I've Built</h2>
           <p className="text-muted max-w-xl mx-auto">
-            Free, practical tools to help you make better AI decisions — no sign-up required to get started.
+            Real tools, live and free to use. Each one built to solve a specific PM workflow problem.
           </p>
         </div>
 
@@ -76,46 +140,42 @@ export default function Tools() {
           {tools.map((tool) => (
             <div
               key={tool.title}
-              className={`bg-surface border rounded-xl p-7 flex flex-col transition-all duration-300 ${
+              className={`bg-bg border rounded-xl p-7 flex flex-col transition-all duration-300 ${
                 tool.status === 'live'
-                  ? 'border-accent/30 hover:border-accent/60'
-                  : 'border-[#2A2A2A] opacity-70'
+                  ? 'border-navy/30 hover:border-navy/60 hover:shadow-md'
+                  : 'border-border opacity-60'
               }`}
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-lg bg-navy-light flex items-center justify-center">
+                  <svg className="w-5 h-5 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                 </div>
-                {tool.badge && (
-                  <span className="text-xs font-medium bg-[#2A2A2A] text-muted px-2.5 py-1 rounded-full">
-                    {tool.badge}
-                  </span>
-                )}
-                {tool.status === 'live' && (
-                  <span className="flex items-center gap-1.5 text-xs font-medium text-green-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span>
-                    Live
-                  </span>
-                )}
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
+                  tool.status === 'live'
+                    ? 'bg-green-50 text-green-700 border border-green-200'
+                    : 'bg-gray-100 text-gray-500'
+                }`}>
+                  {tool.status === 'live' ? '● Live' : tool.tag}
+                </span>
               </div>
 
-              <h3 className="text-base font-semibold mb-3">{tool.title}</h3>
+              <h3 className="text-base font-semibold text-text mb-3">{tool.title}</h3>
               <p className="text-muted text-sm leading-relaxed flex-1">{tool.description}</p>
 
               {tool.link && (
                 <div className="mt-6 flex items-center gap-4">
                   <Link
                     to={tool.link}
-                    className="text-accent hover:text-white text-sm font-semibold transition-colors"
+                    className="text-navy hover:text-navy-dark text-sm font-semibold transition-colors"
                   >
                     {tool.linkLabel}
                   </Link>
                   {tool.caseStudy && (
                     <Link
                       to={tool.caseStudy}
-                      className="text-muted hover:text-white text-sm transition-colors"
+                      className="text-muted hover:text-text text-sm transition-colors"
                     >
                       Case study →
                     </Link>
@@ -125,10 +185,6 @@ export default function Tools() {
             </div>
           ))}
         </div>
-
-        <p className="text-center text-muted/60 text-sm mt-10">
-          More tools launching soon — follow along on LinkedIn for updates.
-        </p>
       </div>
     </section>
   )

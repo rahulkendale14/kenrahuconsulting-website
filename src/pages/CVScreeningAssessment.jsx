@@ -5,8 +5,8 @@ import CVSubmitForm from '../components/screening/CVSubmitForm'
 function Spinner({ message }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-bg">
-      <div className="w-12 h-12 rounded-full border-4 border-surface border-t-accent animate-spin mb-6"></div>
-      <p className="text-white font-medium">{message}</p>
+      <div className="w-12 h-12 rounded-full border-4 border-border border-t-navy animate-spin mb-6"></div>
+      <p className="text-text font-medium">{message}</p>
       <p className="text-muted text-sm mt-2">This takes 10–15 seconds</p>
     </div>
   )
@@ -16,7 +16,6 @@ export default function CVScreeningAssessment() {
   const { config } = useParams()
   const [jobConfig, setJobConfig] = useState(null)
   const [stage, setStage] = useState('form')
-  const [result, setResult] = useState(null)
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -39,7 +38,6 @@ export default function CVScreeningAssessment() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      setResult(data)
       setStage('result')
     } catch (err) {
       setError(err.message || 'Failed to screen CV. Please try again.')
@@ -51,7 +49,7 @@ export default function CVScreeningAssessment() {
     return (
       <div className="min-h-screen bg-bg flex items-center justify-center px-6">
         <div className="text-center">
-          <p className="text-red-400 text-lg font-medium mb-2">Invalid Link</p>
+          <p className="text-red-500 text-lg font-medium mb-2">Invalid Link</p>
           <p className="text-muted text-sm">{error}</p>
         </div>
       </div>
@@ -61,11 +59,11 @@ export default function CVScreeningAssessment() {
   if (!jobConfig) return null
 
   return (
-    <div className="min-h-screen bg-bg text-white">
-      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0F0F0F]/80 border-b border-[#2A2A2A]">
+    <div className="min-h-screen bg-bg text-text">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-border shadow-sm">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="text-white text-sm font-medium">{jobConfig.role}</span>
-          <span className="text-muted text-xs">Powered by kenrahu.com</span>
+          <span className="text-text text-sm font-medium">{jobConfig.role}</span>
+          <span className="text-muted text-xs">Powered by kenrahuconsulting.com</span>
         </div>
       </div>
 
@@ -76,12 +74,12 @@ export default function CVScreeningAssessment() {
         {stage === 'loading' && <Spinner message="Screening your CV against job requirements..." />}
         {stage === 'result' && (
           <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
-            <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="w-16 h-16 bg-green-50 border border-green-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold mb-3">CV Submitted</h2>
+            <h2 className="text-2xl font-bold text-text mb-3">CV Submitted</h2>
             <p className="text-muted text-sm max-w-sm">Your CV has been received and screened. The recruiter will be in touch if your profile is a match.</p>
           </div>
         )}

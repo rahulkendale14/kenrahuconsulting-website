@@ -7,6 +7,8 @@ export const projects = [
     status: 'Live',
     duration: '3 weeks',
     impact: '70% faster screening',
+    toolLink: '/tools/cv-screening',
+    toolLabel: 'Try the AI Candidate Screener',
 
     hero: {
       client: 'Mid-size staffing firm (anonymised)',
@@ -82,6 +84,445 @@ export const projects = [
       { label: 'Screening Rubric Template (PDF)', available: false },
       { label: 'Prompt Engineering Log', available: false },
       { label: 'Eval Results Summary', available: false },
+    ],
+  },
+  {
+    slug: 'salary-planner',
+    title: 'Goal-Based Salary Planner',
+    subtitle: 'A guided financial planning tool that helps salaried users convert their income, obligations, and savings goals into a realistic monthly plan.',
+    tags: ['Product Management', 'Tool Design', 'Personal Finance'],
+    status: 'Live',
+    duration: '2 weeks',
+    impact: 'End-to-end MVP',
+    toolLink: '/tools/salary-planner',
+    toolLabel: 'Try the Salary Planner',
+
+    hero: {
+      client: 'Personal project',
+      industry: 'Personal Finance',
+      teamSize: '1 (PM + Builder)',
+      problem: 'Salaried users want to save consistently but struggle to turn monthly obligations and goals into a realistic plan without spreadsheets or complex finance apps.',
+    },
+
+    problem: {
+      summary: 'Many people know they should save, but they do not know how much they can save safely after accounting for fixed obligations, household spending, irregular expenses, and financial goals. Existing approaches fall into two extremes: generic budgeting templates that do not adapt to real-life constraints, or complex finance tools that overwhelm users before they reach a decision. The core question I wanted to answer: how might we help a salaried user create a realistic monthly plan that balances essential spending with a meaningful annual savings target?',
+      quotes: [
+        { text: 'I know I should save more, but every time I try to plan it out I end up confused about how much I can actually put aside.', role: 'Target user archetype' },
+        { text: 'I set a savings goal at the start of the year but by month three I have already broken it because the plan did not account for real life.', role: 'Target user archetype' },
+      ],
+      rootCauses: [
+        'Users set savings goals without understanding whether they are achievable within current monthly cash flow',
+        'Fixed commitments such as bills and EMIs reduce flexibility, but most budgeting tools do not surface this early enough in the flow',
+        'Users want guidance first and customization later, rather than being asked to manually optimize every category from scratch',
+      ],
+    },
+
+    product: {
+      summary: 'A guided multi-step salary planning tool that accepts take-home salary, expenses, savings goals, and a savings preference, then generates a recommended monthly allocation, surfaces whether the annual goal is achievable, and lets users adjust the plan before finalizing it. Positioned as a decision-support tool, not a full finance stack.',
+      components: [
+        { name: 'Guided input flow', description: 'Three-step data capture: income and obligations, then savings goal and preference. Grouped logically to reduce cognitive load and prevent the screen from feeling like a tax form.' },
+        { name: 'Recommendation engine', description: 'Priority waterfall algorithm that protects essential obligations first, then allocates savings and buffer according to the selected preference — conservative, balanced, or aggressive.' },
+        { name: 'Goal feasibility check', description: 'Compares projected 12-month savings against the stated annual goal and surfaces a clear achievable or shortfall signal with the exact gap amount.' },
+        { name: 'Alternate scenarios', description: 'When the goal is unrealistic, three paths are offered: boost income to hit the goal in 12 months, extend the timeline at current savings, or a hybrid of both.' },
+        { name: 'Manual adjustment', description: 'Slider-based overrides for key categories with live recalculation so users can see the consequences of their changes in real time before committing.' },
+        { name: 'Final summary', description: 'Side-by-side comparison of the recommended plan versus the adjusted plan, with a full 12-month projection and a print or save option.' },
+      ],
+    },
+
+    keyDecisions: [
+      {
+        decision: 'Recommendation first, customization second',
+        rationale: 'I considered letting users manually set every category from the start. I rejected this because it forces users to optimize before they understand the baseline. By showing a recommendation first, users can react to a concrete starting point rather than create a plan from scratch — significantly reducing cognitive load.',
+        tradeoff: 'Some power users may want more control upfront. The manual adjustment screen addresses this after the recommendation is shown, preserving flexibility without front-loading complexity.',
+      },
+      {
+        decision: 'Protect essential obligations before suggesting savings targets',
+        rationale: 'The recommendation engine uses a strict priority waterfall: fixed obligations and household essentials are fully allocated before any savings rate is applied. This prevents the tool from ever suggesting an aggressive savings target that would leave a user short on rent or food.',
+        tradeoff: 'For users with very high fixed obligations, the savings recommendation may be low or near zero. The tool surfaces an explicit stress flag in this case so users understand why, rather than hiding the constraint.',
+      },
+      {
+        decision: 'Show alternate scenarios instead of a dead end when the goal is unreachable',
+        rationale: 'A flow that ends with "your goal is not achievable" has high abandonment. By offering three concrete alternate paths — boost income, extend timeline, or hybrid — the product preserves forward motion and gives users something actionable regardless of their current financial situation.',
+        tradeoff: 'Three scenarios adds output complexity. I kept each scenario card intentionally minimal: one headline number, one timeline, and the monthly savings required.',
+      },
+      {
+        decision: 'Scope the MVP to decision support, not account aggregation',
+        rationale: 'Bank integration and transaction syncing would have expanded scope without improving the core job in version one: help the user understand what a realistic plan looks like. Manual input keeps the tool fast and avoids the trust barrier that comes with connecting financial accounts.',
+        tradeoff: 'Users must enter expenses manually each session. This adds friction but encourages active engagement with their actual numbers rather than passive reliance on automated data.',
+      },
+    ],
+
+    evalFramework: {
+      summary: 'Validation focused on whether users could complete the flow without confusion, understand the recommendation without extra explanation, and trust the output enough to act on it.',
+      stages: [
+        { name: 'Engine logic validation', description: 'Tested the recommendation engine against edge cases: very high fixed obligations, zero savings, and aggressive goals with insufficient income. Confirmed the stress flag and alternate plan logic triggered correctly in all scenarios.' },
+        { name: 'Full flow walkthrough', description: 'Walked through all seven screens using representative user scenarios — low income with dependents, high earner with large EMIs, first-time saver — to verify screen order, decision points, and information density at each step.' },
+        { name: 'Recommendation transparency check', description: 'Verified that every allocation category shows an explanatory note on the breakdown screen. A recommendation without explanation is a black box. Each line item needed a visible rationale to build user trust.' },
+      ],
+    },
+
+    failureModes: [
+      { mode: 'Unrealistic or zero inputs', impact: 'Medium', mitigation: 'Inline validation on all fields. Stress flag triggered when fixed obligations exceed 85% of income.' },
+      { mode: 'User distrust of the recommendation', impact: 'High', mitigation: 'Breakdown screen explains each allocation with a short rationale note. Manual adjustment gives users full override capability.' },
+      { mode: 'Goal-setting without follow-through', impact: 'Medium', mitigation: 'Final summary includes a print and save option. Recurring tracking and nudges are deferred to V2.' },
+      { mode: 'Over-reliance without revisiting the plan', impact: 'Medium', mitigation: 'No persistent state in V1 by design — users re-enter data each session, which forces active re-engagement with their actual numbers over time.' },
+    ],
+
+    v2Changes: [
+      'Progress tracking across months — compare planned versus actual savings over time',
+      'Saved user profiles so returning users do not need to re-enter data each session',
+      'Smart nudges and monthly reminders to review and update the plan',
+      'Deeper analytics: savings velocity, goal trajectory, and monthly variance',
+      'Household mode for shared financial planning between partners or family members',
+    ],
+
+    documents: [
+      { label: 'Wireframes — 7 screens', available: false },
+      { label: 'PRD Summary', available: false },
+      { label: 'Recommendation Engine Logic', available: false },
+    ],
+  },
+  {
+    slug: 'prd-generator',
+    title: 'Enterprise AI PRD Generator',
+    subtitle: 'A structured tool that converts a product brief into a 12-section enterprise-grade PRD in under 60 seconds — saving 2 hours per document.',
+    tags: ['Product Management', 'Prompt Engineering', 'Tool Design'],
+    status: 'Live',
+    duration: '1 week',
+    impact: '2 hrs saved per PRD',
+    toolLink: '/tools/prd-generator',
+    toolLabel: 'Try the PRD Generator',
+
+    hero: {
+      client: 'Personal project',
+      industry: 'AI Product Management',
+      teamSize: '1 (PM + Builder)',
+      problem: 'Writing PRDs for enterprise AI initiatives required 2+ hours per document filling in sections — stakeholder mapping, governance controls, measurement framework — that should be standard but no tool encoded them correctly.',
+    },
+
+    problem: {
+      summary: 'Writing a PRD for an AI initiative is not the same as writing a standard feature PRD. Enterprise AI projects require stakeholder RACI across 13 roles, governance layers for model decisions, a measurement framework across 9 metric areas, human-in-the-loop boundaries, and a compliance section that varies by regulated industry. Generic "generate a PRD" prompts produce shallow outputs that look complete on screen but fall apart in a real stakeholder review. The frustration was personal: I was writing PRDs for AI workflow automation projects and spending 2+ hours per document on sections that should be standard. The problem was not knowing what to write — it was that no tool encoded the right enterprise framework to write against.',
+      quotes: [
+        { text: 'I keep getting PRDs that cover features but skip governance and measurement entirely — no one approves those in a regulated environment.', role: 'AI PM archetype' },
+        { text: 'Writing the stakeholder section from scratch every time is pure overhead. The roles do not change, only the responsibilities do.', role: 'Product Lead archetype' },
+      ],
+      rootCauses: [
+        'Generic AI prompts treat a PRD as a feature spec, not an operating model document',
+        'Most templates omit governance, measurement framework, and human-in-the-loop boundaries entirely',
+        'Users without an enterprise PM background do not know which sections are missing until the document fails review',
+      ],
+    },
+
+    product: {
+      summary: 'A 5-stage guided tool that accepts structured inputs about an AI initiative, then generates a full 12-section enterprise PRD via a system prompt encoding a complete enterprise operating model. Designed for AI PMs, consultants, and product leads scoping AI workflow automation projects.',
+      components: [
+        { name: 'Structured input form', description: 'Captures product name, problem statement, target users, goals and metrics, functions to automate, compliance requirements, and timeline. Forces articulation of essentials before generation begins — vague inputs produce vague outputs.' },
+        { name: 'Functions to automate selector', description: '8 pre-defined checkbox options covering the most common AI workflow functions: intake normalisation, summarisation, routing, root-cause hinting, and more. If none are selected, the system infers from the problem statement.' },
+        { name: 'Enterprise system prompt', description: 'Encodes 13 stakeholder roles, 5 governance layers, 9 measurement metric areas, a 6-stage operating model, human-in-the-loop principles, and a reports framework. This is what separates the output from generic PRD generators.' },
+        { name: 'Preview gate', description: 'Shows a teaser of the generated PRD before unlocking the full document — a natural checkpoint that lets users confirm the output is relevant before reading 12 sections.' },
+        { name: '12-section structured output', description: 'Each section rendered individually from JSON: executive summary, problem statement, strategic rationale, automated functions, goals and metrics, stakeholders and roles, feature requirements, governance framework, security and compliance, operating model, reports to create, risks and open questions.' },
+      ],
+    },
+
+    keyDecisions: [
+      {
+        decision: 'Structured form over a freeform prompt box',
+        rationale: 'I considered a single text input where users paste their idea. I rejected it because vague inputs produce vague outputs. A structured form forces the user to articulate the problem, success metrics, and target users before generation. The quality difference in output is significant — the model has concrete anchors to work from rather than interpreting a half-formed idea.',
+        tradeoff: 'More friction at entry. Offset by the fact that users who complete the form have already done the thinking, so the output reflects their actual initiative rather than a generic interpretation.',
+      },
+      {
+        decision: 'System prompt as a complete enterprise operating model',
+        rationale: 'The system prompt does not say "write a PRD." It encodes a full enterprise operating model: 13 stakeholder roles with specific responsibilities, 5 governance layers, 9 metric areas, a 6-stage operating model, and human-in-the-loop principles. Inspired by enterprise PM practice in regulated industries. This is what produces enterprise-grade output rather than a feature spec with headings.',
+        tradeoff: 'The prompt is long and opinionated — it excels for AI workflow automation in regulated industries, not for a consumer app PRD. The tool is scoped accordingly.',
+      },
+      {
+        decision: 'Pre-defined automation functions as checkboxes rather than freeform',
+        rationale: 'Rather than asking users to describe what they want to automate in free text, I offered 8 options derived from the most common AI workflow automation patterns. This reduces cognitive load and ensures the generated PRD uses recognisable automation framing. Selecting nothing is a valid choice — the model infers from the problem statement.',
+        tradeoff: 'Limits to 8 options. Edge cases outside these functions fall back to inference, which works well in practice given the tool\'s defined scope.',
+      },
+      {
+        decision: 'Preview gate before full document unlock',
+        rationale: 'The output flows into a preview screen showing partial content before the user sees all 12 sections. This creates a useful pause point — users confirm the generation is relevant to their initiative before investing time reading a detailed document.',
+        tradeoff: 'One extra click for the user. Acceptable given it surfaces whether the generation is on-target before the user commits to reading the full output.',
+      },
+    ],
+
+    evalFramework: {
+      summary: 'Validation focused on whether the output would pass a real enterprise stakeholder review — not just whether it looked complete.',
+      stages: [
+        { name: 'Section completeness check', description: 'Verified all 12 sections generated with substantive content across 3 representative inputs: an incident triage tool, a document summarisation product, and a customer routing automation. No section should produce generic placeholder text.' },
+        { name: 'Stakeholder and governance coverage', description: 'Checked that all 13 stakeholder roles appeared with responsibilities adapted to each specific initiative, and that all 5 governance layers contained concrete activities rather than generic statements.' },
+        { name: 'Metric specificity check', description: 'Verified the goals and metrics section covered all 9 metric areas with measures specific to the stated initiative. A list of generic KPIs signals the model did not anchor to the user\'s context.' },
+      ],
+    },
+
+    failureModes: [
+      { mode: 'Vague inputs produce generic output', impact: 'High', mitigation: 'Required fields for problem, target users, and goals; placeholder text in each field guides the level of specificity needed' },
+      { mode: 'Tool used outside its intended scope', impact: 'Medium', mitigation: 'Landing page and form framing explicitly scoped to AI workflow automation initiatives in enterprise or regulated environments' },
+      { mode: 'User treats output as final without review', impact: 'High', mitigation: 'Strategic rationale section explicitly names which decisions must remain under human control; output is positioned as a structured starting point, not a finished document' },
+      { mode: 'Rate limit frustration for power users', impact: 'Medium', mitigation: '3 PRDs per day per IP — covers legitimate daily use while preventing abuse of a free, inference-cost tool' },
+    ],
+
+    v2Changes: [
+      'Export directly to Notion or Google Docs — copy-paste is the biggest friction point after generation',
+      'Section-level regeneration — rerun a single section without regenerating the full PRD',
+      'Saved PRD history so users can compare versions across iterations of the same initiative',
+      'Input templates for common initiative types: triage automation, document processing, customer routing',
+      'Team mode — share a draft PRD link for collaborative annotation before finalising',
+    ],
+
+    documents: [
+      { label: 'System Prompt Design Doc', available: false },
+      { label: 'Enterprise Operating Model Reference', available: false },
+      { label: 'Eval Test Cases (3 initiatives)', available: false },
+    ],
+  },
+  {
+    slug: 'ai-servicing-triage',
+    title: 'AI Servicing Triage & Decision Support',
+    subtitle: 'Taking an LLM from business case to governed production inside a regulated bank — 22% less manual support dependency',
+    tags: ['GenAI in Production', 'AI Governance', 'Digital Banking'],
+    status: 'Shipped',
+    duration: 'Phased rollout',
+    impact: '22% less manual effort',
+
+    hero: {
+      client: 'Global financial services firm (anonymised)',
+      industry: 'Banking & Financial Services',
+      teamSize: 'Multiple workstreams, cross-functional',
+      problem:
+        'Customer servicing requests arrived as unstructured free text and were categorised and routed by hand. Volume made the manual step expensive, and misrouting sent cases to the wrong queue — where they waited before anyone noticed.',
+    },
+
+    problem: {
+      summary:
+        'Manual triage of servicing requests was both a cost line and a service-quality problem. Every misrouted case paid a double penalty: the time spent handling it in the wrong queue, plus the delay before it reached the right one. The obvious fix — an LLM that reads the request and routes it — was easy to prototype and hard to get approved. In a regulated environment, "the model is usually right" is not an answer anyone will sign off on.',
+      // NOTE FOR RAHUL: replace these with things people actually said, or delete the quotes
+      // array entirely. Do not publish invented quotes attributed to real colleagues.
+      quotes: [
+        { text: 'Placeholder — replace with a real quote or remove.', role: 'Servicing Operations' },
+        { text: 'Placeholder — replace with a real quote or remove.', role: 'Risk & Controls' },
+      ],
+      rootCauses: [
+        'Categorisation depended on individual judgement, so the same request could be routed differently by different people',
+        'Misroutes were only discovered downstream, after the delay had already been incurred',
+        'Reporting on triage quality was manual, so nobody could see the size of the problem in real time',
+      ],
+    },
+
+    product: {
+      summary:
+        'An LLM-assisted categorisation and routing layer that proposes a category and a confidence score for each incoming servicing request. The design assumption was not that the model would be right — it was that the model would sometimes be wrong, and the system had to behave correctly when it was.',
+      components: [
+        {
+          name: 'Categorisation & Routing Engine',
+          description: 'LLM-assisted classification of free-text servicing requests into the existing routing taxonomy, returning a category plus a confidence score.',
+        },
+        {
+          name: 'Confidence-Based Override Thresholds',
+          description: 'Below a defined confidence level, the request does not auto-route. The threshold is a product decision, tuned against observed accuracy — not a fixed constant.',
+        },
+        {
+          name: 'Human-in-the-Loop Review',
+          description: 'Low-confidence and high-risk categories always route to a human reviewer before action. High-risk is defined by business impact, not by model uncertainty alone.',
+        },
+        {
+          name: 'Accuracy & Override Instrumentation',
+          description: 'Categorisation accuracy and override rate are tracked continuously and surfaced to stakeholders — the same numbers that gated each rollout phase.',
+        },
+      ],
+    },
+
+    keyDecisions: [
+      {
+        decision: 'Write the governance design before the business case',
+        rationale:
+          'The approval blocker in a regulated environment is never "will it work" — it is "what happens when it does not". Defining override thresholds and human-in-the-loop review up front meant the business case could be reviewed on its merits instead of stalling on unanswered risk questions.',
+        tradeoff: 'Slower to a first demo. Dramatically faster to an approved rollout.',
+      },
+      {
+        decision: 'Make the rollout gate a number, not a date',
+        rationale:
+          'Each expansion phase was gated on observed categorisation accuracy and override rate rather than a calendar milestone. When the numbers held, we expanded scope. When they did not, we stopped and looked at why.',
+        tradeoff: 'Less predictable timeline for stakeholders — traded for the ability to defend every expansion decision with evidence.',
+      },
+      {
+        decision: 'Treat the override rate as a product metric, not a failure count',
+        rationale:
+          'A falling override rate is the clearest signal that the system is earning trust in production. A rising one is an early warning that something upstream has shifted. Framing overrides as signal rather than embarrassment kept reviewers reporting them honestly.',
+        tradeoff: 'Required explaining to stakeholders why a non-zero override rate is a healthy target rather than a defect.',
+      },
+      {
+        decision: 'Keep the human decision, automate the preparation',
+        rationale:
+          'The system proposes; a person decides in every case that carries real risk. This is what made the capability approvable, and it is also what made the efficiency gain durable — nobody had to unwind it later after an incident.',
+        tradeoff: 'Ceiling on theoretical automation. Floor under actual risk.',
+      },
+    ],
+
+    evalFramework: {
+      summary:
+        'Quality was validated through the rollout itself rather than in a one-off pre-launch test. Each phase produced the evidence that justified the next.',
+      stages: [
+        {
+          name: 'Baseline & Business Case',
+          description: 'Quantified the cost of manual triage and the downstream impact of misrouting, so that any improvement could be measured against a number that existed before the project started.',
+        },
+        {
+          name: 'Supervised Phase',
+          description: 'Human-supervised operation with accuracy and override rate tracked from day one. The goal was not throughput — it was building a defensible evidence base.',
+        },
+        {
+          name: 'Phased Expansion',
+          description: 'Scope widened only where accuracy and override rates supported it, with each phase treated as an explicit go/no-go decision rather than a rollout schedule.',
+        },
+      ],
+    },
+
+    failureModes: [
+      {
+        mode: 'Confident but wrong categorisation',
+        impact: 'High',
+        mitigation: 'Confidence thresholds plus mandatory human review on high-risk categories, so a high-confidence error still meets a person before it has consequences.',
+      },
+      {
+        mode: 'Silent drift in request patterns',
+        impact: 'High',
+        mitigation: 'Continuous accuracy and override-rate tracking, so a change in the input distribution shows up as a moving metric rather than a rising complaint volume.',
+      },
+      {
+        mode: 'Over-reliance by reviewers',
+        impact: 'Medium',
+        mitigation: 'Override treated as expected behaviour and monitored as a metric — a suspiciously low override rate is investigated, not celebrated.',
+      },
+      {
+        mode: 'Scope expansion outrunning evidence',
+        impact: 'Medium',
+        mitigation: 'Each phase gated on its own measured performance, with expansion blocked until the numbers for the current scope held.',
+      },
+    ],
+
+    v2Changes: [
+      'Formal eval harness with a versioned, labelled test set so prompt and model changes can be regression-tested before release',
+      'Model routing by request complexity — a smaller model for the routine majority, escalating only where it earns its cost',
+      'Explicit kill-switch runbook: what the system falls back to, who can trigger it, and how quickly a trigger is noticed',
+      'Reviewer-facing explanation of why a category was proposed, to speed up the human decision rather than just presenting it',
+    ],
+
+    documents: [
+      { label: 'AI Governance Design Summary', available: false },
+      { label: 'Rollout Gate Criteria', available: false },
+      { label: 'Failure Mode Register', available: false },
+    ],
+  },
+  {
+    slug: 'rag-knowledge-assistant',
+    title: 'RAG Knowledge Assistant',
+    subtitle: 'A ground-up RAG build over a 193-page technical whitepaper — 13/18 retrieval accuracy, zero hallucination on out-of-scope questions',
+    tags: ['RAG', 'LLM Evaluation', 'AI Engineering Fundamentals'],
+    status: 'Learning Project — Complete',
+    duration: '5-step build',
+    impact: '13/18 retrieval accuracy, 0% hallucination',
+
+    hero: {
+      client: 'Personal learning project — no client engagement',
+      industry: 'Enterprise technical documentation (storage/infrastructure whitepaper)',
+      teamSize: 'Solo build',
+      problem:
+        'Reading about RAG pipelines and building one are different kinds of understanding. The goal was to build a naive RAG pipeline from scratch — no framework shortcuts — over a real, messy 193-page technical whitepaper, then evaluate it honestly against a golden question set instead of eyeballing a few demo queries.',
+    },
+
+    problem: {
+      summary:
+        'Most RAG tutorials use toy documents and never show where a first-pass pipeline actually breaks. The only way to build real intuition for chunking, retrieval, and hallucination behaviour was to pick a genuinely difficult source document — one with near-duplicate technical entities (similar product model numbers) that a naive pipeline would plausibly confuse — and measure the result instead of assuming it worked.',
+      quotes: [],
+      rootCauses: [
+        'A toy or clean dataset doesn\'t surface the failure modes that matter in real technical documents — near-identical entities, duplicated facts across pages, chunk-boundary information loss',
+        'Without a scored golden eval set, "it works" is just an impression from a few manually-checked queries, not a measurable result',
+        'Understanding a technique by using a framework that hides the mechanics is a different skill than being able to build and debug the pipeline yourself',
+      ],
+    },
+
+    product: {
+      summary:
+        'A naive RAG pipeline built step by step: PDF ingestion and chunking, local embeddings, vector retrieval, and grounded generation with an explicit hallucination guard — each stage built and understood individually before moving to the next.',
+      components: [
+        { name: 'Ingestion & Chunking', description: 'Recursive paragraph/sentence splitting with ~15% overlap between chunks and page-number tagging for citations. 227 chunks from the source document.' },
+        { name: 'Local Embeddings', description: 'sentence-transformers (all-MiniLM-L6-v2) run on-device — no API key, no per-token cost — stored in a persistent Chroma collection.' },
+        { name: 'Vector Retrieval', description: 'Query embedded with the same local model, top-k=4 similarity search against the Chroma collection.' },
+        { name: 'Grounded Generation + Citation Guard', description: 'Groq-hosted Llama 3.3 70B answers only from retrieved context and explicitly says "I don\'t know based on this document" when the answer isn\'t present — the core hallucination guard.' },
+      ],
+    },
+
+    keyDecisions: [
+      {
+        decision: 'Start with the simplest chunking strategy, not the most sophisticated one',
+        rationale:
+          'Structure-aware and semantic-similarity chunking were both on the table, but neither had evidence behind it yet. Recursive paragraph/sentence splitting was the deliberately simple baseline — the point was to let a real eval reveal whether a more sophisticated technique was actually needed, not to guess upfront.',
+        tradeoff: 'Chunks ended up averaging 613 tokens against a 500-token target, since the source PDF\'s paragraphs were larger than expected. Left as-is rather than re-tuned blind — the eval was the right place to find out if it mattered.',
+      },
+      {
+        decision: 'Use local embeddings instead of a hosted API',
+        rationale:
+          'A practical constraint (OpenAI key blank, Gemini key expired) turned into a real lesson on the local-vs-hosted embedding tradeoff: sentence-transformers running on-device costs nothing, needs no key, and has no rate limit — at the cost of lower semantic power than a large hosted model.',
+        tradeoff: 'Likely weaker cross-context matching than a top-tier hosted embedding model, but zero cost and zero external dependency for a learning build.',
+      },
+      {
+        decision: 'Build an 18-question golden eval set — including 2 deliberate trick questions — before declaring the project done',
+        rationale:
+          'The goal was a measurable retrieval accuracy number and a real test of hallucination behaviour, not an impression from a handful of manually-checked queries. The 2 trick questions (no answer exists in the document) exist specifically to test whether the model would invent an answer rather than say it doesn\'t know.',
+        tradeoff: 'Took longer to reach "done," but the 13/18 result and the 0% hallucination rate are backed by an actual scored set, not an anecdote.',
+      },
+      {
+        decision: 'Stop after one eval pass instead of tuning further',
+        rationale:
+          '13/18 is a representative, honest first-pass result for a naive RAG pipeline. The real objective — learning exactly where and why naive RAG struggles (near-identical entities, chunk boundaries) — was already achieved. Chasing a higher number without a second eval baseline would just be guessing.',
+        tradeoff: 'Retrieval could likely be improved with the deferred upgrades below, but tuning blind against a single eval run risks overfitting to this one question set.',
+      },
+    ],
+
+    evalFramework: {
+      summary:
+        'An 18-question golden set (5 easy, 9 medium, 2 hard, plus 2 trick questions with no answer in the document) run automatically against the pipeline, comparing retrieved pages to expected answer pages.',
+      stages: [
+        { name: 'Golden Set Design', description: '18 questions spanning difficulty levels, plus 2 deliberately unanswerable questions to specifically test the hallucination guard.' },
+        { name: 'Automated Retrieval Scoring', description: 'Every question run through the pipeline; retrieved pages compared against expected answer pages. Result: 13/18 hit.' },
+        { name: 'Failure Analysis', description: 'All 5 misses individually diagnosed rather than lumped into one number — see Failure Modes below.' },
+      ],
+    },
+
+    failureModes: [
+      {
+        mode: 'Near-identical entity confusion (e.g. product model 9346 vs 9546)',
+        impact: 'Medium',
+        mitigation: 'The dominant miss pattern in the eval. Deferred fix: metadata filtering by model/section name to disambiguate before retrieval, now that there\'s concrete evidence of where this breaks.',
+      },
+      {
+        mode: 'Chunk-boundary information loss',
+        impact: 'Low',
+        mitigation: '~15% chunk overlap was applied specifically to reduce this; eval showed one near-miss still slipped past it — a candidate for raising top-k from 4 to 6-8.',
+      },
+      {
+        mode: 'Hallucination on out-of-scope questions',
+        impact: 'High (if unguarded)',
+        mitigation: 'Prompt explicitly instructs the model to answer only from retrieved context and say it doesn\'t know otherwise. Both trick questions in the eval passed — the guard held.',
+      },
+      {
+        mode: 'Same fact duplicated across multiple source pages',
+        impact: 'Low',
+        mitigation: 'Caused 2 "false miss" results where the answer was correct but cited a different valid page than the one the eval set expected — an eval-labeling nuance, not a pipeline defect.',
+      },
+    ],
+
+    v2Changes: [
+      'Increase top-k from 4 to 6-8 to reduce model-number confusion misses',
+      'Add metadata filtering by model/section name to disambiguate near-identical products',
+      'Try structure-aware chunking now that there\'s concrete evidence of where naive chunking falls short',
+    ],
+
+    documents: [
+      { label: 'Eval Results (18-question golden set)', available: false },
+      { label: 'Progress Log (5-step build)', available: false },
     ],
   },
 ]

@@ -54,28 +54,20 @@ export default function PRDGenerator() {
   }
 
   return (
-    <div className="min-h-screen bg-bg text-white">
-      {/* Top bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0F0F0F]/80 border-b border-[#2A2A2A]">
+    <div className="min-h-screen bg-bg text-text">
+      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/90 border-b border-border">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="text-muted hover:text-white text-sm transition-colors">← Back to home</Link>
-          <span className="text-muted text-xs">PRD Generator · Free</span>
+          <Link to="/" className="text-muted hover:text-text text-sm transition-colors">← Back to home</Link>
+          <span className="text-muted text-xs font-medium">PRD Generator · Free</span>
+          <div className="w-28" />
         </div>
       </div>
 
-      {/* Main content */}
       <div className="pt-16">
         {stage === STAGES.start && <PRDStart onStart={handleStart} />}
 
         {stage === STAGES.form && (
-          <div className="max-w-2xl mx-auto px-6 pt-12 pb-16">
-            {error && (
-              <div className="mb-6 bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg px-4 py-3">
-                {error}
-              </div>
-            )}
-            <PRDForm onSubmit={handleFormSubmit} />
-          </div>
+          <PRDForm onSubmit={handleFormSubmit} error={error} />
         )}
 
         {stage === STAGES.loading && <PRDLoading />}

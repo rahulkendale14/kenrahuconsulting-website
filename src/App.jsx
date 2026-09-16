@@ -11,6 +11,9 @@ import Portfolio from './pages/Portfolio'
 import ProjectPage from './pages/ProjectPage'
 import CVScreeningSetup from './pages/CVScreeningSetup'
 import CVScreeningAssessment from './pages/CVScreeningAssessment'
+import Quiz from './pages/Quiz'
+import FakeResumeDetector from './pages/FakeResumeDetector'
+import CandidateSubmissionWriter from './pages/CandidateSubmissionWriter'
 
 export default function App() {
   return (
@@ -28,6 +31,9 @@ export default function App() {
         <Route path="/tools/metrics-framework" element={<MetricsFramework />} />
         <Route path="/tools/raci-builder" element={<RACIBuilder />} />
         <Route path="/tools/salary-planner" element={<SalaryPlanner />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/tools/fake-resume-detector" element={<FakeResumeDetector />} />
+        <Route path="/tools/candidate-submission-writer" element={<CandidateSubmissionWriter />} />
       </Routes>
     </BrowserRouter>
   )

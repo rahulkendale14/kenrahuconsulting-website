@@ -415,4 +415,114 @@ export const projects = [
       { label: 'Failure Mode Register', available: false },
     ],
   },
+  {
+    slug: 'rag-knowledge-assistant',
+    title: 'RAG Knowledge Assistant',
+    subtitle: 'A ground-up RAG build over a 193-page technical whitepaper — 13/18 retrieval accuracy, zero hallucination on out-of-scope questions',
+    tags: ['RAG', 'LLM Evaluation', 'AI Engineering Fundamentals'],
+    status: 'Learning Project — Complete',
+    duration: '5-step build',
+    impact: '13/18 retrieval accuracy, 0% hallucination',
+
+    hero: {
+      client: 'Personal learning project — no client engagement',
+      industry: 'Enterprise technical documentation (storage/infrastructure whitepaper)',
+      teamSize: 'Solo build',
+      problem:
+        'Reading about RAG pipelines and building one are different kinds of understanding. The goal was to build a naive RAG pipeline from scratch — no framework shortcuts — over a real, messy 193-page technical whitepaper, then evaluate it honestly against a golden question set instead of eyeballing a few demo queries.',
+    },
+
+    problem: {
+      summary:
+        'Most RAG tutorials use toy documents and never show where a first-pass pipeline actually breaks. The only way to build real intuition for chunking, retrieval, and hallucination behaviour was to pick a genuinely difficult source document — one with near-duplicate technical entities (similar product model numbers) that a naive pipeline would plausibly confuse — and measure the result instead of assuming it worked.',
+      quotes: [],
+      rootCauses: [
+        'A toy or clean dataset doesn\'t surface the failure modes that matter in real technical documents — near-identical entities, duplicated facts across pages, chunk-boundary information loss',
+        'Without a scored golden eval set, "it works" is just an impression from a few manually-checked queries, not a measurable result',
+        'Understanding a technique by using a framework that hides the mechanics is a different skill than being able to build and debug the pipeline yourself',
+      ],
+    },
+
+    product: {
+      summary:
+        'A naive RAG pipeline built step by step: PDF ingestion and chunking, local embeddings, vector retrieval, and grounded generation with an explicit hallucination guard — each stage built and understood individually before moving to the next.',
+      components: [
+        { name: 'Ingestion & Chunking', description: 'Recursive paragraph/sentence splitting with ~15% overlap between chunks and page-number tagging for citations. 227 chunks from the source document.' },
+        { name: 'Local Embeddings', description: 'sentence-transformers (all-MiniLM-L6-v2) run on-device — no API key, no per-token cost — stored in a persistent Chroma collection.' },
+        { name: 'Vector Retrieval', description: 'Query embedded with the same local model, top-k=4 similarity search against the Chroma collection.' },
+        { name: 'Grounded Generation + Citation Guard', description: 'Groq-hosted Llama 3.3 70B answers only from retrieved context and explicitly says "I don\'t know based on this document" when the answer isn\'t present — the core hallucination guard.' },
+      ],
+    },
+
+    keyDecisions: [
+      {
+        decision: 'Start with the simplest chunking strategy, not the most sophisticated one',
+        rationale:
+          'Structure-aware and semantic-similarity chunking were both on the table, but neither had evidence behind it yet. Recursive paragraph/sentence splitting was the deliberately simple baseline — the point was to let a real eval reveal whether a more sophisticated technique was actually needed, not to guess upfront.',
+        tradeoff: 'Chunks ended up averaging 613 tokens against a 500-token target, since the source PDF\'s paragraphs were larger than expected. Left as-is rather than re-tuned blind — the eval was the right place to find out if it mattered.',
+      },
+      {
+        decision: 'Use local embeddings instead of a hosted API',
+        rationale:
+          'A practical constraint (OpenAI key blank, Gemini key expired) turned into a real lesson on the local-vs-hosted embedding tradeoff: sentence-transformers running on-device costs nothing, needs no key, and has no rate limit — at the cost of lower semantic power than a large hosted model.',
+        tradeoff: 'Likely weaker cross-context matching than a top-tier hosted embedding model, but zero cost and zero external dependency for a learning build.',
+      },
+      {
+        decision: 'Build an 18-question golden eval set — including 2 deliberate trick questions — before declaring the project done',
+        rationale:
+          'The goal was a measurable retrieval accuracy number and a real test of hallucination behaviour, not an impression from a handful of manually-checked queries. The 2 trick questions (no answer exists in the document) exist specifically to test whether the model would invent an answer rather than say it doesn\'t know.',
+        tradeoff: 'Took longer to reach "done," but the 13/18 result and the 0% hallucination rate are backed by an actual scored set, not an anecdote.',
+      },
+      {
+        decision: 'Stop after one eval pass instead of tuning further',
+        rationale:
+          '13/18 is a representative, honest first-pass result for a naive RAG pipeline. The real objective — learning exactly where and why naive RAG struggles (near-identical entities, chunk boundaries) — was already achieved. Chasing a higher number without a second eval baseline would just be guessing.',
+        tradeoff: 'Retrieval could likely be improved with the deferred upgrades below, but tuning blind against a single eval run risks overfitting to this one question set.',
+      },
+    ],
+
+    evalFramework: {
+      summary:
+        'An 18-question golden set (5 easy, 9 medium, 2 hard, plus 2 trick questions with no answer in the document) run automatically against the pipeline, comparing retrieved pages to expected answer pages.',
+      stages: [
+        { name: 'Golden Set Design', description: '18 questions spanning difficulty levels, plus 2 deliberately unanswerable questions to specifically test the hallucination guard.' },
+        { name: 'Automated Retrieval Scoring', description: 'Every question run through the pipeline; retrieved pages compared against expected answer pages. Result: 13/18 hit.' },
+        { name: 'Failure Analysis', description: 'All 5 misses individually diagnosed rather than lumped into one number — see Failure Modes below.' },
+      ],
+    },
+
+    failureModes: [
+      {
+        mode: 'Near-identical entity confusion (e.g. product model 9346 vs 9546)',
+        impact: 'Medium',
+        mitigation: 'The dominant miss pattern in the eval. Deferred fix: metadata filtering by model/section name to disambiguate before retrieval, now that there\'s concrete evidence of where this breaks.',
+      },
+      {
+        mode: 'Chunk-boundary information loss',
+        impact: 'Low',
+        mitigation: '~15% chunk overlap was applied specifically to reduce this; eval showed one near-miss still slipped past it — a candidate for raising top-k from 4 to 6-8.',
+      },
+      {
+        mode: 'Hallucination on out-of-scope questions',
+        impact: 'High (if unguarded)',
+        mitigation: 'Prompt explicitly instructs the model to answer only from retrieved context and say it doesn\'t know otherwise. Both trick questions in the eval passed — the guard held.',
+      },
+      {
+        mode: 'Same fact duplicated across multiple source pages',
+        impact: 'Low',
+        mitigation: 'Caused 2 "false miss" results where the answer was correct but cited a different valid page than the one the eval set expected — an eval-labeling nuance, not a pipeline defect.',
+      },
+    ],
+
+    v2Changes: [
+      'Increase top-k from 4 to 6-8 to reduce model-number confusion misses',
+      'Add metadata filtering by model/section name to disambiguate near-identical products',
+      'Try structure-aware chunking now that there\'s concrete evidence of where naive chunking falls short',
+    ],
+
+    documents: [
+      { label: 'Eval Results (18-question golden set)', available: false },
+      { label: 'Progress Log (5-step build)', available: false },
+    ],
+  },
 ]

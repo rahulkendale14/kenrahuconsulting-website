@@ -14,6 +14,7 @@ import CVScreeningAssessment from './pages/CVScreeningAssessment'
 import Quiz from './pages/Quiz'
 import FakeResumeDetector from './pages/FakeResumeDetector'
 import CandidateSubmissionWriter from './pages/CandidateSubmissionWriter'
+import TalentPoolSearch from './pages/TalentPoolSearch'
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/tools/fake-resume-detector" element={<FakeResumeDetector />} />
         <Route path="/tools/candidate-submission-writer" element={<CandidateSubmissionWriter />} />
+        <Route path="/tools/talent-pool-search" element={<TalentPoolSearch />} />
       </Routes>
     </BrowserRouter>
   )

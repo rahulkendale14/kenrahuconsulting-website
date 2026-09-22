@@ -91,6 +91,14 @@ const tools = [
     tag: 'Free Tool',
   },
   {
+    title: 'Talent Pool Search',
+    description: 'Paste a job description and search your existing resume pool with hybrid semantic + keyword matching — cited evidence for why each candidate matched. Built for re-hiring against a pool you already have.',
+    status: 'live',
+    link: '/tools/talent-pool-search',
+    linkLabel: 'Search Now →',
+    tag: 'Free Tool',
+  },
+  {
     title: 'User Research Synthesizer',
     description: 'Paste interview transcripts and get synthesised themes, pain points, and opportunity areas — in minutes instead of days.',
     status: 'soon',
